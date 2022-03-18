@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, ImageBackground } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import image from '../../assets/bg.png';
+import image from '../assets/bg.png';
 import React from 'react';
 
 const Page = ({ children }) => {

@@ -1,7 +1,5 @@
 import React from 'react';
-import { ImageBackground, StyleSheet, Text, View } from 'react-native';
-
-import { StatusBar } from 'expo-status-bar';
+import Title from './src/Title';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/Pages/Home';
@@ -12,7 +10,11 @@ const App = () => {
     <>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerTransparent: true }}>
-          <Stack.Screen name='Home' component={Home} />
+          <Stack.Screen
+            name='Home'
+            component={Home}
+            options={{ headerTitle: props => <Title {...props} /> }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
