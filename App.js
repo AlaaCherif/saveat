@@ -13,7 +13,7 @@ const App = () => {
         <Stack.Navigator
           screenOptions={{
             headerTransparent: true,
-            animation: 'slide_from_right',
+            animation: 'simple_push',
           }}
         >
           <Stack.Screen

@@ -10,10 +10,7 @@ const Home = ({ navigation }) => {
   const goLogin = () => {
     navigation.navigate('Login1');
   };
-  const toggleChanged = () => {
-    if (changed) setChanged(false);
-    else setChanged(true);
-  };
+
   return (
     <Page changed={changed}>
       <View style={styles.container}>
@@ -23,8 +20,7 @@ const Home = ({ navigation }) => {
         <Text style={styles.paragraph}>
           The Number One anti-food waste app in Tunisia
         </Text>
-        <Button title='Sign in' onPress={toggleChanged} />
-        <Text>{changed.toString()}</Text>
+        <Button title='Sign in' onPress={goLogin} />
         <Button title='Sign up' backgroundColor='white' color='black' />
       </View>
     </Page>
@@ -42,7 +38,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: '15%',
   },
   paragraph: {
     fontSize: 20,

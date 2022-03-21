@@ -1,29 +1,24 @@
-import {
-  StyleSheet,
-  View,
-  ImageBackground,
-  Animated,
-  Button,
-} from 'react-native';
+import { StyleSheet, View, ImageBackground, Animated } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import image from '../assets/bg1.png';
-import image2 from '../assets/bg2.png';
+
 import bare from '../assets/bare.png';
 import React, { useRef, useEffect } from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
 
 const Page = ({ children, second, changed }) => {
   const progress = useRef(new Animated.Value(-730)).current;
-  // useEffect(() => {});
+  useEffect(() => {
+    if (second) startAnimation();
+  }, []);
+  const startAnimation = () => {
+    Animated.timing(progress, {
+      toValue: -350,
+      useNativeDriver: false,
+      duration: 750,
+    }).start();
+  };
   return (
     <View style={styles.container}>
-      {/* <ImageBackground
-        source={second ? image2 : image}
-        resizeMode='cover'
-        style={styles.image}
-      >
-        {children}
-      </ImageBackground> */}
       <ImageBackground source={bare} resizeMode='cover' style={styles.image}>
         <Animated.View style={[styles.svgContainer, { right: progress }]}>
           <Svg width='880' height='2400' viewBox='0 0 880 2400' fill='none'>
@@ -36,16 +31,6 @@ const Page = ({ children, second, changed }) => {
         </Animated.View>
         {children}
       </ImageBackground>
-      <Button
-        title='reset'
-        onPress={() => {
-          Animated.timing(progress, {
-            toValue: -350,
-            useNativeDriver: false,
-          }).start();
-        }}
-      />
-      {/* <Image source={big} style={styles.image2} resizeMode='cover' /> */}
       <StatusBar />
     </View>
   );
