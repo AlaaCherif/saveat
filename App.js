@@ -1,5 +1,5 @@
 import React from 'react';
-import Title from './src/Title';
+import Title from './src/UI/Title';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/Pages/Home';

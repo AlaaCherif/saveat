@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Page from '../Page';
 import image from '../../assets/earth.png';
 import Dash from '../Icons/Dash';
-import Button from '../Button';
+import Button from '../UI/Button';
 
 const Home = ({ navigation }) => {
   const [changed, setChanged] = useState(false);

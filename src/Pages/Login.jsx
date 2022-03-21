@@ -1,11 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { StyleSheet, Text, View, Switch } from 'react-native';
+import React, { useState } from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/LoginLogo';
 import Input from '../UI/Input';
-import Button from '../Button';
+import Button from '../UI/Button';
+import LoginForm from './../LoginForm';
 
 const Login = () => {
+  const [enabled, setEnabled] = useState(false);
   return (
     <Page second='true'>
       <View style={styles.container}>
@@ -13,17 +15,19 @@ const Login = () => {
           <LoginLogo />
           <Text style={styles.title}>Sign in</Text>
         </View>
-        <View style={styles.inputContainer}>
-          <Input label='Email' />
-          <Input label='Password' />
-          <Text style={styles.help}>
-            Must be longer than 8 characters and contain one capital letter.
-          </Text>
-          <Button title='Submit' />
-          <Text style={{ ...styles.help, marginVertical: 6 }}>
-            Forgot your password ?
-          </Text>
-        </View>
+        <LoginForm />
+      </View>
+      <View style={styles.switch}>
+        {/* <Switch
+          trackColor={{ false: '#4DAAAA', true: '#81b0ff' }}
+          thumbColor={enabled ? '#f5dd4b' : '#f4f3f4'}
+          ios_backgroundColor='#3e3e3e'
+          onValueChange={() => {
+            setEnabled(previousState => !previousState);
+          }}
+          value={enabled}
+        />
+        <LoginLogo style={styles.logo} /> */}
       </View>
     </Page>
   );
@@ -48,13 +52,16 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 40,
   },
-  inputContainer: {
-    marginLeft: '20%',
-    marginTop: '15%',
-    maxWidth: '60%',
-  },
+
   help: {
     fontSize: 15,
     color: '#A5A5A5',
+  },
+  switch: {
+    position: 'relative',
+  },
+  logo: {
+    position: 'absolute',
+    top: 0,
   },
 });
