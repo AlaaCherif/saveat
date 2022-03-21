@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, Image, Platform } from 'react-native';
 import React, { useState } from 'react';
 import Page from '../Page';
-import image from '../../assets/earth.png';
+import image from '../../assets/splash.png';
 import Dash from '../Icons/Dash';
 import Button from '../UI/Button';
 
@@ -9,6 +9,9 @@ const Home = ({ navigation }) => {
   const [changed, setChanged] = useState(false);
   const goLogin = () => {
     navigation.navigate('Login1');
+  };
+  const goSignup = () => {
+    navigation.navigate('Signup');
   };
 
   return (
@@ -21,7 +24,12 @@ const Home = ({ navigation }) => {
           The Number One anti-food waste app in Tunisia
         </Text>
         <Button title='Sign in' onPress={goLogin} />
-        <Button title='Sign up' backgroundColor='white' color='black' />
+        <Button
+          title='Sign up'
+          backgroundColor='white'
+          color='black'
+          onPress={goSignup}
+        />
       </View>
     </Page>
   );

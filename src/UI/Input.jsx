@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
   },
   inputError: {
     borderColor: 'red',
-    backgroundColor: 'rgba(228, 70, 70, 0.308)',
+    backgroundColor: '#FFBCBC',
   },
   input: {
     borderColor: '#ECEEEE',

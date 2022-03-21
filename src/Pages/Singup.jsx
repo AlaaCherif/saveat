@@ -3,17 +3,17 @@ import React from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/LoginLogo';
 
-import LoginForm from './../LoginForm';
+import SignupForm from './../SignupForm';
 
-const Login = () => {
+const Signup = () => {
   return (
     <Page second='true'>
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <LoginLogo />
-          <Text style={styles.title}>Sign in</Text>
+          <Text style={styles.title}>Create Account</Text>
         </View>
-        <LoginForm />
+        <SignupForm />
       </View>
       <View style={styles.switch}>
         {/* <Switch
@@ -31,7 +31,7 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;
 
 const styles = StyleSheet.create({
   container: {
