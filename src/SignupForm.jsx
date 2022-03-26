@@ -15,10 +15,10 @@ const validationSchema = Yup.object({
   email: Yup.string()
     .email('Invalid email!')
     .required('You need to input your email!'),
-  password: Yup.string().required('You need to input your password!'),
+  password: Yup.string().required('You need to input your password !'),
   passwordConfirm: Yup.string()
-    .equals([Yup.ref('password')], 'Passwords do not match !')
-    .required(),
+    .equals([Yup.ref('password')], 'Password s do not match !')
+    .required('Please confirm your password !'),
 });
 
 const SignupForm = () => {
@@ -26,8 +26,11 @@ const SignupForm = () => {
     <Formik
       initialValues={newUser}
       validationSchema={validationSchema}
-      onSubmit={() => {
-        console.log('submitted');
+      onSubmit={(values, formikActions) => {
+        setTimeout(() => {
+          formikActions.resetForm();
+          formikActions.setSubmitting(false);
+        }, 3000);
       }}
     >
       {({
@@ -57,9 +60,11 @@ const SignupForm = () => {
               onChangeText={handleChange('password')}
               secureTextEntry
             />
-            <Text style={styles.help}>
-              Must be longer than 8 characters and contain one capital letter.
-            </Text>
+            {!errors.password ? (
+              <Text style={styles.help}>
+                Must be longer than 8 characters and contain one capital letter.
+              </Text>
+            ) : null}
             <Input
               error={touched.passwordConfirm && errors.passwordConfirm}
               label='Confirm Password'

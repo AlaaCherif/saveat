@@ -1,9 +1,16 @@
-import { StyleSheet, Text, View, Switch } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Switch,
+  KeyboardAvoidingView,
+} from 'react-native';
 import React from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/LoginLogo';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
+import AddLogo from '../UI/AddLogo';
 
 const AccountAccess = ({ route, navigation }) => {
   const changeType = () => {
@@ -20,13 +27,19 @@ const AccountAccess = ({ route, navigation }) => {
         </View>
         {route.params.login ? <LoginForm /> : <SignupForm />}
       </View>
-      <View>
+      <View behavior='' style={styles.switchContainer}>
+        {route.params.login ? (
+          <LoginLogo width='20' height='24' />
+        ) : (
+          <AddLogo style={{ marginRight: 2 }} />
+        )}
         <Switch
           trackColor={{ false: '#4DAAAA', true: '#4DAAAA' }}
           ios_backgroundColor='#4DAAAA'
           onValueChange={changeType}
           value={route.params.login}
           thumbColor='#f4f3f4'
+          style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
         />
       </View>
     </Page>
@@ -52,16 +65,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 40,
   },
-
   help: {
     fontSize: 15,
     color: '#A5A5A5',
   },
-  switch: {
-    position: 'relative',
-  },
-  logo: {
-    position: 'absolute',
-    top: 0,
+  switchContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    marginRight: 20,
+    marginBottom: 20,
+    alignItems: 'center',
   },
 });

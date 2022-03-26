@@ -6,12 +6,12 @@ const Input = props => {
     <View style={styles.container}>
       <View style={styles.errorAndLabel}>
         <Text style={styles.label}>{props.label}</Text>
-        {props.error ? <Text style={styles.error}>{props.error}</Text> : null}
       </View>
       <TextInput
         style={[styles.input, props.error ? styles.inputError : null]}
         {...props}
       />
+      {props.error ? <Text style={styles.error}>{props.error}</Text> : null}
     </View>
   );
 };
