@@ -1,21 +1,21 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import LoginLogo from '../UI/LoginLogo';
-import SignupForm from './../SignupForm';
+import LoginForm from './../LoginForm';
 
-const Signup = () => {
+const Login = () => {
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
         <LoginLogo />
-        <Text style={styles.title}>Create Account</Text>
+        <Text style={styles.title}>Login</Text>
       </View>
-      <SignupForm />
+      <LoginForm />
     </View>
   );
 };
 
-export default Signup;
+export default Login;
 
 const styles = StyleSheet.create({
   container: {

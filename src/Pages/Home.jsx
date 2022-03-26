@@ -8,10 +8,10 @@ import Button from '../UI/Button';
 const Home = ({ navigation }) => {
   const [changed, setChanged] = useState(false);
   const goLogin = () => {
-    navigation.navigate('Login1');
+    navigation.navigate('Login1', { login: true });
   };
   const goSignup = () => {
-    navigation.navigate('Signup');
+    navigation.navigate('Login1', { login: false });
   };
 
   return (

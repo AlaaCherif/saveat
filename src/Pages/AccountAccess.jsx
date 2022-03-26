@@ -1,37 +1,39 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Switch } from 'react-native';
 import React from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/LoginLogo';
+import LoginForm from '../LoginForm';
+import SignupForm from '../SignupForm';
 
-import LoginForm from './../LoginForm';
-
-const Login = () => {
+const AccountAccess = ({ route, navigation }) => {
+  const changeType = () => {
+    navigation.setParams({ login: !route.params.login });
+  };
   return (
     <Page second='true'>
       <View style={styles.container}>
         <View style={styles.titleContainer}>
           <LoginLogo />
-          <Text style={styles.title}>Sign in</Text>
+          <Text style={styles.title}>
+            {route.params.login ? 'Log in' : 'Sign up'}
+          </Text>
         </View>
-        <LoginForm />
+        {route.params.login ? <LoginForm /> : <SignupForm />}
       </View>
-      <View style={styles.switch}>
-        {/* <Switch
-          trackColor={{ false: '#4DAAAA', true: '#81b0ff' }}
-          thumbColor={enabled ? '#f5dd4b' : '#f4f3f4'}
-          ios_backgroundColor='#3e3e3e'
-          onValueChange={() => {
-            setEnabled(previousState => !previousState);
-          }}
-          value={enabled}
+      <View>
+        <Switch
+          trackColor={{ false: '#4DAAAA', true: '#4DAAAA' }}
+          ios_backgroundColor='#4DAAAA'
+          onValueChange={changeType}
+          value={route.params.login}
+          thumbColor='#f4f3f4'
         />
-        <LoginLogo style={styles.logo} /> */}
       </View>
     </Page>
   );
 };
 
-export default Login;
+export default AccountAccess;
 
 const styles = StyleSheet.create({
   container: {

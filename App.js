@@ -3,7 +3,7 @@ import Title from './src/UI/Title';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/Pages/Home';
-import Login from './src/Pages/Login';
+import AccountAccess from './src/Pages/AccountAccess';
 import Signup from './src/Pages/Singup';
 
 const App = () => {
@@ -24,14 +24,16 @@ const App = () => {
           />
           <Stack.Screen
             name='Login1'
-            component={Login}
-            options={{ headerTitle: props => <Title {...props} /> }}
+            component={AccountAccess}
+            options={{
+              headerTitle: props => <Title {...props} />,
+            }}
           />
-          <Stack.Screen
+          {/* <Stack.Screen
             name='Signup'
             component={Signup}
             options={{ headerTitle: props => <Title {...props} /> }}
-          />
+          /> */}
         </Stack.Navigator>
       </NavigationContainer>
     </>
