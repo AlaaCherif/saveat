@@ -30,6 +30,7 @@ const SignupForm = () => {
         setTimeout(() => {
           formikActions.resetForm();
           formikActions.setSubmitting(false);
+          console.log(values);
         }, 3000);
       }}
     >
@@ -73,7 +74,6 @@ const SignupForm = () => {
               onChangeText={handleChange('passwordConfirm')}
               secureTextEntry
             />
-
             <Button
               title='Submit'
               onPress={handleSubmit}

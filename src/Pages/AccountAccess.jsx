@@ -71,8 +71,8 @@ const styles = StyleSheet.create({
   },
   switchContainer: {
     flexDirection: 'row',
-    justifyContent: 'flex-end',
-    marginRight: 20,
+    justifyContent: 'flex-start',
+    marginLeft: 20,
     marginBottom: 20,
     alignItems: 'center',
   },

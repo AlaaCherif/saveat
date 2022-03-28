@@ -26,6 +26,7 @@ const LoginForm = () => {
         setTimeout(() => {
           formikActions.resetForm();
           formikActions.setSubmitting(false);
+          console.log(values);
         }, 3000);
       }}
     >
@@ -57,15 +58,18 @@ const LoginForm = () => {
                 onChangeText={handleChange('password')}
                 secureTextEntry
               />
-              <Text style={styles.help}>
-                Must be longer than 8 characters and contain one capital letter.
-              </Text>
+              {!errors.password ? (
+                <Text style={styles.help}>
+                  Must be longer than 8 characters and contain one capital
+                  letter.
+                </Text>
+              ) : null}
               <Button
                 title='Submit'
                 onPress={handleSubmit}
                 disabled={isSubmitting}
               />
-              <Text style={{ ...styles.help, marginVertical: 6 }}>
+              <Text style={{ ...styles.help, marginVertical: 10 }}>
                 Forgot your password ?
               </Text>
             </View>

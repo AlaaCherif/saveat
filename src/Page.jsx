@@ -1,11 +1,17 @@
-import { StyleSheet, View, ImageBackground, Animated } from 'react-native';
+import {
+  StyleSheet,
+  ImageBackground,
+  Animated,
+  KeyboardAvoidingView,
+} from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import bare from '../assets/bare.png';
 import React, { useRef, useEffect } from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
+import KeyboardAvoidingWrapper from './UI/KeyboardAvoidingWrapper';
 
-const Page = ({ children, second, changed }) => {
+const Page = ({ children, second }) => {
   const progress = useRef(new Animated.Value(-730)).current;
   useEffect(() => {
     if (second) startAnimation();
@@ -18,7 +24,7 @@ const Page = ({ children, second, changed }) => {
     }).start();
   };
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingWrapper>
       <ImageBackground source={bare} resizeMode='cover' style={styles.image}>
         <Animated.View style={[styles.svgContainer, { right: progress }]}>
           <Svg width='880' height='2400' viewBox='0 0 880 2400' fill='none'>
@@ -30,9 +36,9 @@ const Page = ({ children, second, changed }) => {
           </Svg>
         </Animated.View>
         {children}
+        <StatusBar />
       </ImageBackground>
-      <StatusBar />
-    </View>
+    </KeyboardAvoidingWrapper>
   );
 };
 
