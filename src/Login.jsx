@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import LoginLogo from '../UI/LoginLogo';
 import LoginForm from './../LoginForm';
+import Button from './UI/Button';
 
 const Login = () => {
   return (
@@ -11,6 +12,8 @@ const Login = () => {
         <Text style={styles.title}>Login</Text>
       </View>
       <LoginForm />
+      <Text>Or</Text>
+      <Button title='HI' />
     </View>
   );
 };

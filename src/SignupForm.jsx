@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Input from './UI/Input';
 import Button from './UI/Button';
+import FbLogo from './UI/FbLogo';
 
 const newUser = {
   email: '',
@@ -22,6 +23,14 @@ const validationSchema = Yup.object({
 });
 
 const SignupForm = () => {
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const toggleShowPassword = () => {
+    setShowPassword(prev => !prev);
+  };
+  const toggleShowConfirm = () => {
+    setShowConfirm(prev => !prev);
+  };
   return (
     <Formik
       initialValues={newUser}
@@ -59,7 +68,9 @@ const SignupForm = () => {
               value={password}
               onBlur={handleBlur('password')}
               onChangeText={handleChange('password')}
-              secureTextEntry
+              secureTextEntry={!showPassword}
+              toggle={toggleShowPassword}
+              showPassword={showPassword}
             />
             {!errors.password ? (
               <Text style={styles.help}>
@@ -72,12 +83,25 @@ const SignupForm = () => {
               value={passwordConfirm}
               onBlur={handleBlur('passwordConfirm')}
               onChangeText={handleChange('passwordConfirm')}
-              secureTextEntry
+              secureTextEntry={!showConfirm}
+              toggle={toggleShowConfirm}
+              showPassword={showConfirm}
             />
             <Button
               title='Submit'
               onPress={handleSubmit}
               disabled={isSubmitting}
+            />
+            <Text
+              style={{ textAlign: 'center', ...styles.help, marginTop: 10 }}
+            >
+              Or
+            </Text>
+            <Button
+              title={<FbLogo />}
+              backgroundColor='white'
+              color='#A5A5A5'
+              borderColor='#A5A5A5'
             />
           </View>
         );

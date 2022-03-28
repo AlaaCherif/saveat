@@ -15,7 +15,10 @@ const Button = props => {
         <Text
           style={{
             ...styles.text,
-            color: props.color ? props.colors : 'white',
+            color: props.color ? props.color : 'white',
+            borderWidth: props.borderColor ? 1 : 0,
+            borderColor: props.borderColor ? props.borderColor : null,
+            borderRadius: 7,
           }}
         >
           {props.title}

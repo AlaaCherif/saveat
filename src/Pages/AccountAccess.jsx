@@ -1,16 +1,11 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  Switch,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { StyleSheet, Text, View, Switch } from 'react-native';
 import React from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/LoginLogo';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
 import AddLogo from '../UI/AddLogo';
+import Eye from '../UI/Icons/Eye';
 
 const AccountAccess = ({ route, navigation }) => {
   const changeType = () => {

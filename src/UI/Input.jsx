@@ -1,5 +1,12 @@
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import React from 'react';
+import Eye from './Icons/Eye';
 
 const Input = props => {
   return (
@@ -7,10 +14,23 @@ const Input = props => {
       <View style={styles.errorAndLabel}>
         <Text style={styles.label}>{props.label}</Text>
       </View>
-      <TextInput
-        style={[styles.input, props.error ? styles.inputError : null]}
-        {...props}
-      />
+      <View>
+        <TextInput
+          style={[
+            styles.input,
+            props.error ? styles.inputError : null,
+            styles.password,
+          ]}
+          {...props}
+          onPress={() => {}}
+        />
+        {props.label === 'Password' || props.label === 'Confirm Password' ? (
+          <TouchableWithoutFeedback onPress={props.toggle}>
+            <Eye closed={!props.showPassword} style={styles.eye} />
+          </TouchableWithoutFeedback>
+        ) : null}
+      </View>
+
       {props.error ? <Text style={styles.error}>{props.error}</Text> : null}
     </View>
   );
@@ -51,5 +71,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     width: '100%',
+  },
+  eye: {
+    position: 'absolute',
+    right: 7,
+    top: '15%',
+    padding: 5,
+    borderRadius: 10,
+  },
+  password: {
+    position: 'relative',
   },
 });
