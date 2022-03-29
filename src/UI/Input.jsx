@@ -5,10 +5,11 @@ import {
   TextInput,
   TouchableWithoutFeedback,
 } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import Eye from './Icons/Eye';
 
 const Input = props => {
+  const [focused, setFocused] = useState(false);
   return (
     <View style={styles.container}>
       <View style={styles.errorAndLabel}>
@@ -18,11 +19,17 @@ const Input = props => {
         <TextInput
           style={[
             styles.input,
-            props.error ? styles.inputError : null,
             styles.password,
+            focused ? styles.focusedInput : null,
+            props.error ? styles.inputError : null,
           ]}
+          onFocus={() => {
+            setFocused(true);
+          }}
+          onBlur={() => {
+            setFocused(false);
+          }}
           {...props}
-          onPress={() => {}}
         />
         {props.label === 'Password' || props.label === 'Confirm Password' ? (
           <TouchableWithoutFeedback onPress={props.toggle}>
@@ -48,6 +55,7 @@ const styles = StyleSheet.create({
   inputError: {
     borderColor: 'red',
     backgroundColor: '#FFBCBC',
+    borderWidth: 1,
   },
   input: {
     borderColor: '#ECEEEE',
@@ -82,4 +90,5 @@ const styles = StyleSheet.create({
   password: {
     position: 'relative',
   },
+  focusedInput: { borderColor: '#4DAAAA', borderWidth: 2 },
 });

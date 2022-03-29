@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import Input from './UI/Input';
 import Button from './UI/Button';
 import FbLogo from './UI/FbLogo';
+import Progress from './UI/Icons/Progress';
 
 const newUser = {
   email: '',
@@ -55,6 +56,7 @@ const SignupForm = () => {
         const { email, password, passwordConfirm } = values;
         return (
           <View style={styles.inputContainer}>
+            <Progress step={1} />
             <Input
               error={touched.email && errors.email}
               label='Email'
@@ -109,7 +111,10 @@ const SignupForm = () => {
     </Formik>
   );
 };
-
+//21125610
+//53364802
+//29212206
+//53529891
 export default SignupForm;
 
 const styles = StyleSheet.create({
