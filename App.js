@@ -5,6 +5,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/Pages/Home';
 import AccountAccess from './src/Pages/AccountAccess';
 import Signup from './src/Pages/Singup';
+import EmailVerification from './src/Pages/EmailVerification';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -29,11 +30,11 @@ const App = () => {
               headerTitle: props => <Title {...props} />,
             }}
           />
-          {/* <Stack.Screen
-            name='Signup'
-            component={Signup}
+          <Stack.Screen
+            name='EmailVerification'
+            component={EmailVerification}
             options={{ headerTitle: props => <Title {...props} /> }}
-          /> */}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

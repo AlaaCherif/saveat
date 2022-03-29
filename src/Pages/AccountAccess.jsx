@@ -5,9 +5,11 @@ import LoginLogo from '../UI/LoginLogo';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
 import AddLogo from '../UI/AddLogo';
-import Eye from '../UI/Icons/Eye';
 
 const AccountAccess = ({ route, navigation }) => {
+  const goVerif = () => {
+    navigation.navigate('EmailVerification');
+  };
   const changeType = () => {
     navigation.setParams({ login: !route.params.login });
   };
@@ -28,6 +30,7 @@ const AccountAccess = ({ route, navigation }) => {
         ) : (
           <AddLogo style={{ marginRight: 2 }} />
         )}
+
         <Switch
           trackColor={{ false: '#4DAAAA', true: '#4DAAAA' }}
           ios_backgroundColor='#4DAAAA'

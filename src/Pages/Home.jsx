@@ -13,6 +13,9 @@ const Home = ({ navigation }) => {
   const goSignup = () => {
     navigation.navigate('Login1', { login: false });
   };
+  const goVerif = () => {
+    navigation.navigate('EmailVerification');
+  };
 
   return (
     <Page changed={changed}>
@@ -29,6 +32,12 @@ const Home = ({ navigation }) => {
           backgroundColor='white'
           color='black'
           onPress={goSignup}
+        />
+        <Button
+          title='Verif'
+          backgroundColor='white'
+          color='black'
+          onPress={goVerif}
         />
       </View>
     </Page>

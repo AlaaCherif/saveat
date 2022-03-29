@@ -5,20 +5,29 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import bare from '../assets/bare.png';
 import React, { useRef, useEffect } from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
 import KeyboardAvoidingWrapper from './UI/KeyboardAvoidingWrapper';
 
-const Page = ({ children, second }) => {
-  const progress = useRef(new Animated.Value(-730)).current;
+const Page = ({ children, second, third }) => {
+  const progress = third
+    ? useRef(new Animated.Value(-350)).current
+    : useRef(new Animated.Value(-730)).current;
   useEffect(() => {
     if (second) startAnimation();
+    if (third) startSecondAnimation();
   }, []);
   const startAnimation = () => {
     Animated.timing(progress, {
       toValue: -350,
+      useNativeDriver: false,
+      duration: 750,
+    }).start();
+  };
+  const startSecondAnimation = () => {
+    Animated.timing(progress, {
+      toValue: -100,
       useNativeDriver: false,
       duration: 750,
     }).start();

@@ -59,14 +59,14 @@ const SignupForm = () => {
             <Progress step={1} />
             <Input
               error={touched.email && errors.email}
-              label='Email'
+              label='Email:'
               value={email}
               onBlur={handleBlur('email')}
               onChangeText={handleChange('email')}
             />
             <Input
               error={touched.password && errors.password}
-              label='Password'
+              label='Password:'
               value={password}
               onBlur={handleBlur('password')}
               onChangeText={handleChange('password')}
@@ -81,7 +81,7 @@ const SignupForm = () => {
             ) : null}
             <Input
               error={touched.passwordConfirm && errors.passwordConfirm}
-              label='Confirm Password'
+              label='Confirm Password:'
               value={passwordConfirm}
               onBlur={handleBlur('passwordConfirm')}
               onChangeText={handleChange('passwordConfirm')}
