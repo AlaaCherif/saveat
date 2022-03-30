@@ -31,7 +31,7 @@ const Input = props => {
           }}
           {...props}
         />
-        {props.label === 'Password' || props.label === 'Confirm Password' ? (
+        {props.label === 'Password:' || props.label === 'Confirm Password:' ? (
           <TouchableWithoutFeedback onPress={props.toggle}>
             <Eye closed={!props.showPassword} style={styles.eye} />
           </TouchableWithoutFeedback>
