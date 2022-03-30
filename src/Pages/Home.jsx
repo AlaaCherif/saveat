@@ -4,6 +4,7 @@ import Page from '../Page';
 import image from '../../assets/splash.png';
 import Dash from '../Icons/Dash';
 import Button from '../UI/Button';
+import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
 const Home = ({ navigation }) => {
   const [changed, setChanged] = useState(false);
@@ -17,6 +18,22 @@ const Home = ({ navigation }) => {
     navigation.navigate('EmailVerification');
   };
 
+  const saveData = async () => {
+    try {
+      await AsyncStorageLib.setItem('key', 'valor');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchData = async () => {
+    try {
+      const item = await AsyncStorageLib.getItem('key');
+      console.log(item);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Page changed={changed}>
       <View style={styles.container}>
@@ -33,12 +50,12 @@ const Home = ({ navigation }) => {
           color='black'
           onPress={goSignup}
         />
-        <Button
+        {/* <Button
           title='Verif'
           backgroundColor='white'
           color='black'
           onPress={goVerif}
-        />
+        /> */}
       </View>
     </Page>
   );

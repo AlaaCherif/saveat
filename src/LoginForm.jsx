@@ -5,6 +5,7 @@ import { Formik } from 'formik';
 import Input from './UI/Input';
 import * as Yup from 'yup';
 import FbLogo from './UI/FbLogo';
+import { login } from './api/api.user';
 
 const userCreds = {
   email: '',
@@ -29,12 +30,8 @@ const LoginForm = () => {
       <Formik
         initialValues={userCreds}
         validationSchema={validationSchema}
-        onSubmit={(values, formikActions) => {
-          setTimeout(() => {
-            formikActions.resetForm();
-            formikActions.setSubmitting(false);
-            console.log(values);
-          }, 3000);
+        onSubmit={async (values, formikActions) => {
+          await login(values);
         }}
       >
         {({

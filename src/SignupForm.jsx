@@ -6,6 +6,7 @@ import Input from './UI/Input';
 import Button from './UI/Button';
 import FbLogo from './UI/FbLogo';
 import Progress from './UI/Icons/Progress';
+import { signup } from './api/api.user';
 
 const newUser = {
   email: '',
@@ -23,7 +24,7 @@ const validationSchema = Yup.object({
     .required('Please confirm your password !'),
 });
 
-const SignupForm = () => {
+const SignupForm = ({ next }) => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const toggleShowPassword = () => {
@@ -36,12 +37,11 @@ const SignupForm = () => {
     <Formik
       initialValues={newUser}
       validationSchema={validationSchema}
-      onSubmit={(values, formikActions) => {
-        setTimeout(() => {
-          formikActions.resetForm();
-          formikActions.setSubmitting(false);
-          console.log(values);
-        }, 3000);
+      onSubmit={async (values, formikActions) => {
+        if (values.password !== values.passwordConfirm) return;
+        const usefulValues = { email: values.email, password: values.password };
+        const res = await signup(usefulValues);
+        if (!res) return;
       }}
     >
       {({
@@ -104,6 +104,15 @@ const SignupForm = () => {
               backgroundColor='white'
               color='#A5A5A5'
               borderColor='#A5A5A5'
+            />
+            <Button
+              title={<FbLogo />}
+              backgroundColor='white'
+              color='#A5A5A5'
+              borderColor='#A5A5A5'
+              onPress={() => {
+                next({ hello: 'fu' });
+              }}
             />
           </View>
         );

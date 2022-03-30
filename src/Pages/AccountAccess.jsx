@@ -7,8 +7,8 @@ import SignupForm from '../SignupForm';
 import AddLogo from '../UI/AddLogo';
 
 const AccountAccess = ({ route, navigation }) => {
-  const goVerif = () => {
-    navigation.navigate('EmailVerification');
+  const goVerif = params => {
+    navigation.navigate('EmailVerification', params);
   };
   const changeType = () => {
     navigation.setParams({ login: !route.params.login });
@@ -22,7 +22,7 @@ const AccountAccess = ({ route, navigation }) => {
             {route.params.login ? 'Log in' : 'Sign up'}
           </Text>
         </View>
-        {route.params.login ? <LoginForm /> : <SignupForm />}
+        {route.params.login ? <LoginForm /> : <SignupForm next={goVerif} />}
       </View>
       <View behavior='' style={styles.switchContainer}>
         {route.params.login ? (
