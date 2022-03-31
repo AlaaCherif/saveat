@@ -6,7 +6,7 @@ import Input from './UI/Input';
 import Button from './UI/Button';
 import FbLogo from './UI/FbLogo';
 import Progress from './UI/Icons/Progress';
-import { signup } from './api/api.user';
+import { signUp } from './api/api.user';
 
 const newUser = {
   email: '',
@@ -40,8 +40,13 @@ const SignupForm = ({ next }) => {
       onSubmit={async (values, formikActions) => {
         if (values.password !== values.passwordConfirm) return;
         const usefulValues = { email: values.email, password: values.password };
-        const res = await signup(usefulValues);
-        if (!res) return;
+        const res = await signUp(usefulValues);
+        if (res === 'true') {
+          console.log('we got here and executed next');
+          next();
+        } else {
+          console.log('request timed out! sign up error !');
+        }
       }}
     >
       {({

@@ -5,6 +5,7 @@ import LoginLogo from '../UI/LoginLogo';
 import Progress from '../UI/Icons/Progress';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
+import { Timer } from '../logic/Timer';
 
 const EmailVerification = ({ route }) => {
   const [code, setCode] = useState('');
@@ -30,11 +31,10 @@ const EmailVerification = ({ route }) => {
           keyboardType='number-pad'
         />
         <Text style={{ ...styles.help, marginVertical: 10 }}>
-          Code expires in 09:59
+          {/* <Timer /> */}
         </Text>
         <Text style={{ ...styles.help, marginVertical: 5 }}>Resend code ?</Text>
         <Button title='Verify Email' />
-        <Text>{route.params.hello}</Text>
       </View>
     </Page>
   );

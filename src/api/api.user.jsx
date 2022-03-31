@@ -15,22 +15,24 @@ export const login = async data => {
     })
     .catch(err => {
       console.log(err);
+      return false;
     });
 };
 
-export const signup = async data => {
+export const signUp = async data => {
   return axios
     .post(`${api}/users/signup`, data)
     .then(async res => {
       if (res.data.status === 'success') {
-        await AsyncStorageLib.setItem('authToken', res.data.accessToken);
-        return true;
+        // await AsyncStorageLib.setItem('accessToken', res.data.accessToken);
+        console.log('response ' + res);
+        return 'true';
       } else if (res.data.status === 'error') {
         return res.data.error;
       }
     })
     .catch(err => {
-      console.log(err);
+      return false;
     });
 };
 
@@ -39,22 +41,23 @@ export const verifySignup = async data => {
 
   //post with code
   //if invalid send error else save auth token in local storage and remove access
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = await AsyncStorageLib.getItem('accessToken');
   return axios
     .post(`${api}/users/verifyAccount`, data, {
       headers: {
         access: 'Bearer ' + accessToken,
       },
     })
-    .then(res => {
+    .then(async res => {
       if (res.data.status === 'success') {
-        localStorage.setItem('authToken', res.data.token);
+        await AsyncStorageLib.setItem('authToken', res.data.token);
         return 'true';
       } else if (res.data.status === 'error') {
         return res.data.error;
       }
     })
     .catch(err => {
+      console.log(err);
       return false;
     });
 };

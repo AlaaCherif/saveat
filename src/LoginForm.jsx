@@ -19,10 +19,19 @@ const validationSchema = Yup.object({
   password: Yup.string().required('You need to input your password!'),
 });
 
-const LoginForm = () => {
+const LoginForm = ({ next }) => {
   const [showPassword, setshowPassword] = useState(false);
+  const [failed, setfailed] = useState(false);
   const toggleShow = () => {
     setshowPassword(prev => !prev);
+  };
+  const submitHandler = async values => {
+    let usefulValues = { email: values.email, password: values.password };
+    const res = await login(usefulValues);
+    if (!res) return setfailed('These credentiels don"t match any account');
+    else {
+      next(usefulValues.email);
+    }
   };
 
   return (

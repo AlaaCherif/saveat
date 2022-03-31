@@ -10,6 +10,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "~1.15.0",
     "@react-navigation/native": "^6.0.8",
     "@react-navigation/native-stack": "^6.5.0",
     "axios": "^0.26.1",
@@ -24,8 +25,8 @@
     "react-native-screens": "~3.10.1",
     "react-native-svg": "12.1.1",
     "react-native-web": "0.17.1",
-    "yup": "^0.32.11",
-    "@react-native-async-storage/async-storage": "~1.15.0"
+    "react-timer-hook": "^3.0.5",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"

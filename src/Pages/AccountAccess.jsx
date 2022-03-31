@@ -13,6 +13,9 @@ const AccountAccess = ({ route, navigation }) => {
   const changeType = () => {
     navigation.setParams({ login: !route.params.login });
   };
+  const goHome = email => {
+    navigation.navigate('Authed', { email: email });
+  };
   return (
     <Page second='true'>
       <View style={styles.container}>
@@ -22,7 +25,11 @@ const AccountAccess = ({ route, navigation }) => {
             {route.params.login ? 'Log in' : 'Sign up'}
           </Text>
         </View>
-        {route.params.login ? <LoginForm /> : <SignupForm next={goVerif} />}
+        {route.params.login ? (
+          <LoginForm next={goHome} />
+        ) : (
+          <SignupForm next={goVerif} />
+        )}
       </View>
       <View behavior='' style={styles.switchContainer}>
         {route.params.login ? (
