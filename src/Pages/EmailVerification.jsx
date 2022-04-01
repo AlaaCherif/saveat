@@ -6,11 +6,25 @@ import Progress from '../UI/Icons/Progress';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
 import { Timer } from '../logic/Timer';
+import { verifySignup } from '../api/api.user';
 
-const EmailVerification = ({ route }) => {
+const EmailVerification = ({ route, navigation }) => {
+  const [error, setError] = useState();
   const [code, setCode] = useState('');
   const handleChange = text => {
     setCode(text);
+  };
+  const verifyAccount = async () => {
+    const res = await verifySignup(code);
+    if (res === 'true') {
+      console.log('SIGN UP SUCCESSFUL !');
+      next();
+    } else {
+      setError(res);
+    }
+  };
+  const next = () => {
+    navigation.navigate('Success');
   };
   return (
     <Page third={true}>
@@ -28,13 +42,17 @@ const EmailVerification = ({ route }) => {
           placeholder='Enter code'
           value={code}
           onChangeText={handleChange}
-          keyboardType='number-pad'
+          // keyboardType='number-pad'
         />
         <Text style={{ ...styles.help, marginVertical: 10 }}>
-          {/* <Timer /> */}
+          <View>
+            <Timer />
+          </View>
         </Text>
         <Text style={{ ...styles.help, marginVertical: 5 }}>Resend code ?</Text>
-        <Button title='Verify Email' />
+        <Text>{error && error.toString()}</Text>
+        <Button title='Verify Email' onPress={verifyAccount} />
+        <Button title='Success' onPress={next} />
       </View>
     </Page>
   );

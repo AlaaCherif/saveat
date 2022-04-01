@@ -7,6 +7,7 @@ import AccountAccess from './src/Pages/AccountAccess';
 import Signup from './src/Pages/Singup';
 import EmailVerification from './src/Pages/EmailVerification';
 import AuthedHome from './src/Pages/AuthedHome';
+import SignupSuccess from './src/Pages/SignupSuccess';
 
 const App = () => {
   const Stack = createNativeStackNavigator();
@@ -16,7 +17,7 @@ const App = () => {
         <Stack.Navigator
           screenOptions={{
             headerTransparent: true,
-            animation: 'simple_push',
+            animation: 'fade_from_bottom',
           }}
         >
           <Stack.Screen
@@ -39,6 +40,11 @@ const App = () => {
           <Stack.Screen
             name='Authed'
             component={AuthedHome}
+            options={{ headerTitle: props => <Title {...props} /> }}
+          />
+          <Stack.Screen
+            name='Success'
+            component={SignupSuccess}
             options={{ headerTitle: props => <Title {...props} /> }}
           />
         </Stack.Navigator>

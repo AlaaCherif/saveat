@@ -29,6 +29,7 @@ const Input = props => {
           onBlur={() => {
             setFocused(false);
           }}
+          autoCapitalize={false}
           {...props}
         />
         {props.label === 'Password:' || props.label === 'Confirm Password:' ? (

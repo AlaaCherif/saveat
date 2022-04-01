@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
+import { useTimer } from 'react-timer-hook';
 
 const MyTimer = ({ expiryTimestamp }) => {
   const { seconds, minutes } = useTimer({
@@ -9,7 +10,9 @@ const MyTimer = ({ expiryTimestamp }) => {
 
   return (
     <View>
-      <Text>{minutes}</Text>:<Text>{seconds}</Text>
+      <Text style={styles.help}>
+        Time remaining : {minutes}:{seconds}
+      </Text>
     </View>
   );
 };
@@ -22,3 +25,10 @@ export const Timer = () => {
     </View>
   );
 };
+const styles = StyleSheet.create({
+  help: {
+    fontSize: 15,
+    color: '#A5A5A5',
+    width: 220,
+  },
+});

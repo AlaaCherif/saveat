@@ -9,16 +9,22 @@ import bare from '../assets/bare.png';
 import React, { useRef, useEffect } from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
 import KeyboardAvoidingWrapper from './UI/KeyboardAvoidingWrapper';
+import Progress from './UI/Icons/Progress';
 
-const Page = ({ children, second, third }) => {
-  const progress = third
-    ? useRef(new Animated.Value(-350)).current
-    : useRef(new Animated.Value(-730)).current;
+const Page = ({ children, second, third, noAnimation }) => {
+  let progress = -100;
+  if (!noAnimation) {
+    progress = third
+      ? useRef(new Animated.Value(-350)).current
+      : useRef(new Animated.Value(-730)).current;
+  }
+
   useEffect(() => {
     if (second) startAnimation();
     if (third) startSecondAnimation();
   }, []);
   const startAnimation = () => {
+    if (noAnimation) return;
     Animated.timing(progress, {
       toValue: -350,
       useNativeDriver: false,

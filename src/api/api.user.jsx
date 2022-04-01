@@ -24,7 +24,7 @@ export const signUp = async data => {
     .post(`${api}/users/signup`, data)
     .then(async res => {
       if (res.data.status === 'success') {
-        // await AsyncStorageLib.setItem('accessToken', res.data.accessToken);
+        await AsyncStorageLib.setItem('accessToken', res.data.accessToken);
         console.log('response ' + res);
         return 'true';
       } else if (res.data.status === 'error') {

@@ -125,10 +125,7 @@ const SignupForm = ({ next }) => {
     </Formik>
   );
 };
-//21125610
-//53364802
-//29212206
-//53529891
+
 export default SignupForm;
 
 const styles = StyleSheet.create({
