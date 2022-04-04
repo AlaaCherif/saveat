@@ -21,15 +21,22 @@ const validationSchema = Yup.object({
 
 const LoginForm = ({ next }) => {
   const [showPassword, setshowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [failed, setfailed] = useState(false);
   const toggleShow = () => {
     setshowPassword(prev => !prev);
   };
   const submitHandler = async values => {
+    setfailed(false);
+    setLoading(true);
     let usefulValues = { email: values.email, password: values.password };
     const res = await login(usefulValues);
-    if (!res) return setfailed('These credentiels don"t match any account');
-    else {
+    if (!res) {
+      setTimeout(() => {
+        setLoading(false);
+        return setfailed(`These credentiels don't match any account!`);
+      }, 1000);
+    } else {
       next(usefulValues.email);
     }
   };
@@ -39,9 +46,7 @@ const LoginForm = ({ next }) => {
       <Formik
         initialValues={userCreds}
         validationSchema={validationSchema}
-        onSubmit={async (values, formikActions) => {
-          await login(values);
-        }}
+        onSubmit={submitHandler}
       >
         {({
           values,
@@ -50,7 +55,6 @@ const LoginForm = ({ next }) => {
           handleBlur,
           touched,
           handleSubmit,
-          isSubmitting,
         }) => {
           const { email, password } = values;
           return (
@@ -82,8 +86,9 @@ const LoginForm = ({ next }) => {
                 <Button
                   title='Submit'
                   onPress={handleSubmit}
-                  disabled={isSubmitting}
+                  disabled={loading}
                 />
+                <Text style={styles.error}>{failed && failed.toString()}</Text>
                 <Text style={{ ...styles.help, marginTop: 10 }}>
                   Forgot your password ?
                 </Text>
@@ -118,5 +123,9 @@ const styles = StyleSheet.create({
   help: {
     fontSize: 15,
     color: '#A5A5A5',
+  },
+  error: {
+    fontSize: 15,
+    color: 'red',
   },
 });

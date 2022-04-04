@@ -4,7 +4,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from './src/Pages/Home';
 import AccountAccess from './src/Pages/AccountAccess';
-import Signup from './src/Pages/Singup';
 import EmailVerification from './src/Pages/EmailVerification';
 import AuthedHome from './src/Pages/AuthedHome';
 import SignupSuccess from './src/Pages/SignupSuccess';
@@ -37,14 +36,15 @@ const App = () => {
             component={EmailVerification}
             options={{ headerTitle: props => <Title {...props} /> }}
           />
-          <Stack.Screen
-            name='Authed'
-            component={AuthedHome}
-            options={{ headerTitle: props => <Title {...props} /> }}
-          />
+
           <Stack.Screen
             name='Success'
             component={SignupSuccess}
+            options={{ headerTitle: props => <Title {...props} /> }}
+          />
+          <Stack.Screen
+            name='LoggedHome'
+            component={AuthedHome}
             options={{ headerTitle: props => <Title {...props} /> }}
           />
         </Stack.Navigator>

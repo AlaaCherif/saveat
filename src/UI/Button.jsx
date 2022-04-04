@@ -3,7 +3,7 @@ import React from 'react';
 
 const Button = props => {
   return (
-    <TouchableOpacity onPress={props.onPress}>
+    <TouchableOpacity onPress={props.onPress} disabled={props.disabled}>
       <View
         style={{
           ...styles.container,
@@ -19,9 +19,10 @@ const Button = props => {
             borderWidth: props.borderColor ? 1 : 0,
             borderColor: props.borderColor ? props.borderColor : null,
             borderRadius: 7,
+            backgroundColor: props.disabled ? '#AEE1E1' : null,
           }}
         >
-          {props.title}
+          {props.disabled ? 'Loading' : props.title}
         </Text>
       </View>
     </TouchableOpacity>

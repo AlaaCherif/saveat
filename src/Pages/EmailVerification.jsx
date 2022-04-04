@@ -15,7 +15,7 @@ const EmailVerification = ({ route, navigation }) => {
     setCode(text);
   };
   const verifyAccount = async () => {
-    const res = await verifySignup(code);
+    const res = await verifySignup({ code: code });
     if (res === 'true') {
       console.log('SIGN UP SUCCESSFUL !');
       next();

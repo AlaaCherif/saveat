@@ -4,10 +4,11 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
 export const login = async data => {
   return axios
-    .post(`${api}/user/login`, data)
+    .post(`${api}/users/login`, data)
     .then(async res => {
       if (res.status === 200) {
         await AsyncStorageLib.setItem('authToken', res.data.token);
+        await AsyncStorageLib.setItem('email', data.email);
         return true;
       } else {
         console.log('api error during login');
@@ -24,8 +25,10 @@ export const signUp = async data => {
     .post(`${api}/users/signup`, data)
     .then(async res => {
       if (res.data.status === 'success') {
-        await AsyncStorageLib.setItem('accessToken', res.data.accessToken);
-        console.log('response ' + res);
+        const accessToken = await AsyncStorageLib.setItem(
+          'accessToken',
+          res.data.accessToken
+        );
         return 'true';
       } else if (res.data.status === 'error') {
         return res.data.error;
@@ -49,6 +52,7 @@ export const verifySignup = async data => {
       },
     })
     .then(async res => {
+      console.log(res);
       if (res.data.status === 'success') {
         await AsyncStorageLib.setItem('authToken', res.data.token);
         return 'true';

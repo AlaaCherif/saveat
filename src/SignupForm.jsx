@@ -42,7 +42,6 @@ const SignupForm = ({ next }) => {
         const usefulValues = { email: values.email, password: values.password };
         const res = await signUp(usefulValues);
         if (res === 'true') {
-          console.log('we got here and executed next');
           next();
         } else {
           console.log('request timed out! sign up error !');
@@ -109,15 +108,6 @@ const SignupForm = ({ next }) => {
               backgroundColor='white'
               color='#A5A5A5'
               borderColor='#A5A5A5'
-            />
-            <Button
-              title={<FbLogo />}
-              backgroundColor='white'
-              color='#A5A5A5'
-              borderColor='#A5A5A5'
-              onPress={() => {
-                next({ hello: 'fu' });
-              }}
             />
           </View>
         );

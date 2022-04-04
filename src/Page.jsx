@@ -25,11 +25,13 @@ const Page = ({ children, second, third, noAnimation }) => {
   }, []);
   const startAnimation = () => {
     if (noAnimation) return;
-    Animated.timing(progress, {
-      toValue: -350,
-      useNativeDriver: false,
-      duration: 750,
-    }).start();
+    setTimeout(() => {
+      Animated.timing(progress, {
+        toValue: -350,
+        useNativeDriver: false,
+        duration: 750,
+      }).start();
+    }, 200);
   };
   const startSecondAnimation = () => {
     Animated.timing(progress, {

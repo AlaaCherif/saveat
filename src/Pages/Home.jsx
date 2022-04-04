@@ -1,41 +1,37 @@
-import { StyleSheet, Text, View, Image, Platform } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
 import Page from '../Page';
 import image from '../../assets/splash.png';
 import Dash from '../Icons/Dash';
 import Button from '../UI/Button';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
+import AuthedHome from '../Pages/AuthedHome';
 
+const logout = async () => {
+  await AsyncStorageLib.removeItem('authToken');
+};
 const Home = ({ navigation }) => {
-  const [changed, setChanged] = useState(false);
   const goLogin = () => {
     navigation.navigate('Login1', { login: true });
   };
   const goSignup = () => {
     navigation.navigate('Login1', { login: false });
   };
-  const goVerif = () => {
-    navigation.navigate('EmailVerification');
-  };
+  const [logged, setLogged] = useState();
 
-  const saveData = async () => {
-    try {
-      await AsyncStorageLib.setItem('key', 'valor');
-    } catch (error) {
-      console.log(error);
+  useEffect(async () => {
+    const loggedInUser = await AsyncStorageLib.getItem('authToken');
+    if (loggedInUser) {
+      setLogged(loggedInUser);
+      navigation.replace('LoggedHome');
     }
-  };
+  });
 
-  const fetchData = async () => {
-    try {
-      const item = await AsyncStorageLib.getItem('key');
-      console.log(item);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  return (
-    <Page changed={changed}>
+  const toRender = logged ? (
+    <AuthedHome logout={logout} />
+  ) : (
+    <Page>
+      <Text>{logged}</Text>
       <View style={styles.container}>
         <Image source={image} style={{ width: 300, height: 300 }} />
         <Text style={styles.title}>Save it while saving on it</Text>
@@ -50,15 +46,10 @@ const Home = ({ navigation }) => {
           color='black'
           onPress={goSignup}
         />
-        {/* <Button
-          title='Verif'
-          backgroundColor='white'
-          color='black'
-          onPress={goVerif}
-        /> */}
       </View>
     </Page>
   );
+  return toRender;
 };
 
 export default Home;

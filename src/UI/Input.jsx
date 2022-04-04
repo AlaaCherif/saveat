@@ -29,7 +29,7 @@ const Input = props => {
           onBlur={() => {
             setFocused(false);
           }}
-          autoCapitalize={false}
+          autoCapitalize='none'
           {...props}
         />
         {props.label === 'Password:' || props.label === 'Confirm Password:' ? (
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     width: 220,
     height: 37,
     fontSize: 17,
-    paddingLeft: 10,
+    paddingHorizontal: 12,
   },
   container: {
     alignItems: 'flex-start',

@@ -14,7 +14,7 @@ const AccountAccess = ({ route, navigation }) => {
     navigation.setParams({ login: !route.params.login });
   };
   const goHome = email => {
-    navigation.navigate('Authed', { email: email });
+    navigation.navigate('Home');
   };
   return (
     <Page second='true'>
