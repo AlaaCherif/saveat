@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View, Switch } from 'react-native';
 import React from 'react';
 import Page from '../Page';
-import LoginLogo from '../UI/LoginLogo';
+import LoginLogo from '../UI/Icons/LoginLogo';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
-import AddLogo from '../UI/AddLogo';
+import AddLogo from '../UI/Icons/AddLogo';
 
 const AccountAccess = ({ route, navigation }) => {
   const goVerif = params => {

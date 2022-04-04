@@ -5,11 +5,7 @@ import image from '../../assets/splash.png';
 import Dash from '../Icons/Dash';
 import Button from '../UI/Button';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
-import AuthedHome from '../Pages/AuthedHome';
 
-const logout = async () => {
-  await AsyncStorageLib.removeItem('authToken');
-};
 const Home = ({ navigation }) => {
   const goLogin = () => {
     navigation.navigate('Login1', { login: true });
@@ -25,11 +21,9 @@ const Home = ({ navigation }) => {
       setLogged(loggedInUser);
       navigation.replace('LoggedHome');
     }
-  });
+  }, []);
 
-  const toRender = logged ? (
-    <AuthedHome logout={logout} />
-  ) : (
+  return (
     <Page>
       <Text>{logged}</Text>
       <View style={styles.container}>
@@ -49,7 +43,6 @@ const Home = ({ navigation }) => {
       </View>
     </Page>
   );
-  return toRender;
 };
 
 export default Home;

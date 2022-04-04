@@ -4,7 +4,7 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Input from './UI/Input';
 import Button from './UI/Button';
-import FbLogo from './UI/FbLogo';
+import FbLogo from './UI/Icons/FbLogo';
 import Progress from './UI/Icons/Progress';
 import { signUp } from './api/api.user';
 

@@ -4,7 +4,7 @@ import Button from './UI/Button';
 import { Formik } from 'formik';
 import Input from './UI/Input';
 import * as Yup from 'yup';
-import FbLogo from './UI/FbLogo';
+import FbLogo from './UI/Icons/FbLogo';
 import { login } from './api/api.user';
 
 const userCreds = {

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React, { useState } from 'react';
 import Page from '../Page';
-import LoginLogo from '../UI/LoginLogo';
+import LoginLogo from '../UI/Icons/LoginLogo';
 import Progress from '../UI/Icons/Progress';
 import Input from '../UI/Input';
 import Button from '../UI/Button';
@@ -52,7 +52,6 @@ const EmailVerification = ({ route, navigation }) => {
         <Text style={{ ...styles.help, marginVertical: 5 }}>Resend code ?</Text>
         <Text>{error && error.toString()}</Text>
         <Button title='Verify Email' onPress={verifyAccount} />
-        <Button title='Success' onPress={next} />
       </View>
     </Page>
   );
