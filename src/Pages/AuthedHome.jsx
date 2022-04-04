@@ -6,7 +6,9 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage';
 
 const AuthedHome = ({ navigation }) => {
   const logout = async () => {
-    await AsyncStorageLib.removeItem('authToken');
+    await AsyncStorageLib.removeItem('authToken').then(() => {
+      navigation.replace('Home');
+    });
   };
   useEffect(async () => {
     const loggedInUser = await AsyncStorageLib.getItem('authToken');
@@ -16,12 +18,19 @@ const AuthedHome = ({ navigation }) => {
   }, []);
   return (
     <Page noAnimation={true}>
-      <Text>You re logged in hi </Text>
-      <Button title='LOGOUT' onPress={logout} />
+      <View style={styles.container}>
+        <Text>You re logged in hi </Text>
+        <Button title='LOGOUT' onPress={logout} />
+      </View>
     </Page>
   );
 };
 
 export default AuthedHome;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});

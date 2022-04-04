@@ -11,7 +11,7 @@ const MyTimer = ({ expiryTimestamp }) => {
   return (
     <View>
       <Text style={styles.help}>
-        Time remaining : {minutes}:{seconds}
+        Time remaining : {minutes}:{seconds.toPrecision(2)}
       </Text>
     </View>
   );
