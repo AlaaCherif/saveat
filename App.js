@@ -9,6 +9,7 @@ import AuthedHome from './src/Pages/AuthedHome';
 import SignupSuccess from './src/Pages/SignupSuccess';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import { View, ActivityIndicator } from 'react-native';
+import { AuthProvider } from './src/context/AuthProvider';
 
 const App = () => {
   const [token, setToken] = useState();
@@ -28,9 +29,9 @@ const App = () => {
       </View>
     );
   return (
-    <>
+    <AuthProvider>
       <NavigationContainer>
-        {token === null ? (
+        {token === null || true ? (
           <Stack.Navigator
             screenOptions={{
               headerTransparent: true,
@@ -60,17 +61,17 @@ const App = () => {
               component={SignupSuccess}
               options={{ headerTitle: props => <Title {...props} /> }}
             />
-            {/* <Stack.Screen
-            name='LoggedHome'
-            component={AuthedHome}
-            options={{ headerTitle: props => <Title {...props} /> }}
-          /> */}
+            <Stack.Screen
+              name='LoggedHome'
+              component={AuthedHome}
+              options={{ headerTitle: props => <Title {...props} /> }}
+            />
           </Stack.Navigator>
         ) : (
           <AuthedHome />
         )}
       </NavigationContainer>
-    </>
+    </AuthProvider>
   );
 };
 

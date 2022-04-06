@@ -9,7 +9,7 @@ export const login = async data => {
       if (res.status === 200) {
         await AsyncStorageLib.setItem('authToken', res.data.token);
         await AsyncStorageLib.setItem('email', data.email);
-        return true;
+        return res.data.token;
       } else {
         console.log('api error during login');
       }
@@ -64,4 +64,12 @@ export const verifySignup = async data => {
       console.log(err);
       return false;
     });
+};
+export const loggedIn = async () => {
+  const authToken = await AsyncStorageLib.getItem('authToken');
+  if (authToken && authToken !== undefined) {
+    return true;
+  } else {
+    return false;
+  }
 };

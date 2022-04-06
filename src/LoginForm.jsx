@@ -1,11 +1,12 @@
 import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from './UI/Button';
 import { Formik } from 'formik';
 import Input from './UI/Input';
 import * as Yup from 'yup';
 import FbLogo from './UI/Icons/FbLogo';
 import { login } from './api/api.user';
+import AuthContext from './context/AuthProvider';
 
 const userCreds = {
   email: '',
@@ -20,6 +21,7 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm = ({ next }) => {
+  const { setAuth } = useContext(AuthContext);
   const [showPassword, setshowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [failed, setfailed] = useState(false);
@@ -37,6 +39,7 @@ const LoginForm = ({ next }) => {
         return setfailed(`These credentiels don't match any account!`);
       }, 1000);
     } else {
+      setAuth({ email: usefulValues.email, token: res });
       next(usefulValues.email);
     }
   };

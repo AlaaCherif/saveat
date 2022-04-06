@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View, Image } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Page from '../Page';
 import image from '../../assets/splash.png';
 import Dash from '../Icons/Dash';
 import Button from '../UI/Button';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
+import AuthContext from '../context/AuthProvider';
 
 const Home = ({ navigation }) => {
+  const { auth } = useContext(AuthContext);
   const goLogin = () => {
     navigation.navigate('Login1', { login: true });
   };
@@ -15,13 +17,17 @@ const Home = ({ navigation }) => {
   };
   const [logged, setLogged] = useState();
 
-  useEffect(async () => {
-    const loggedInUser = await AsyncStorageLib.getItem('authToken');
-    if (loggedInUser) {
-      setLogged(loggedInUser);
+  useEffect(() => {
+    console.log(auth.email);
+    if (auth.email) {
       navigation.replace('LoggedHome');
     }
-  }, []);
+    // const loggedInUser = await AsyncStorageLib.getItem('authToken');
+    // if (loggedInUser) {
+    //   setLogged(loggedInUser);
+    //   navigation.replace('LoggedHome');
+    // }
+  });
 
   return (
     <Page>
