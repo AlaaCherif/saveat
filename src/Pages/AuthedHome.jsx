@@ -7,13 +7,13 @@ import AsyncStorageLib from '@react-native-async-storage/async-storage';
 const AuthedHome = ({ navigation }) => {
   const logout = async () => {
     await AsyncStorageLib.removeItem('authToken').then(() => {
-      navigation.replace('Home');
+      // navigation.replace('Home');
     });
   };
   useEffect(async () => {
     const loggedInUser = await AsyncStorageLib.getItem('authToken');
     if (!loggedInUser) {
-      navigation.replace('Home');
+      // navigation.replace('Home');
     }
   }, []);
   return (

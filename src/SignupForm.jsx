@@ -25,8 +25,21 @@ const validationSchema = Yup.object({
 });
 
 const SignupForm = ({ next }) => {
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const submitHandler = async (values, formikActions) => {
+    setLoading(true);
+    if (values.password !== values.passwordConfirm) return;
+    const usefulValues = { email: values.email, password: values.password };
+    const res = await signUp(usefulValues);
+    if (res === 'true') {
+      next();
+    } else {
+      setLoading(false);
+      console.log('request timed out! sign up error !');
+    }
+  };
   const toggleShowPassword = () => {
     setShowPassword(prev => !prev);
   };
@@ -37,16 +50,7 @@ const SignupForm = ({ next }) => {
     <Formik
       initialValues={newUser}
       validationSchema={validationSchema}
-      onSubmit={async (values, formikActions) => {
-        if (values.password !== values.passwordConfirm) return;
-        const usefulValues = { email: values.email, password: values.password };
-        const res = await signUp(usefulValues);
-        if (res === 'true') {
-          next();
-        } else {
-          console.log('request timed out! sign up error !');
-        }
-      }}
+      onSubmit={submitHandler}
     >
       {({
         values,
@@ -93,11 +97,7 @@ const SignupForm = ({ next }) => {
               toggle={toggleShowConfirm}
               showPassword={showConfirm}
             />
-            <Button
-              title='Submit'
-              onPress={handleSubmit}
-              disabled={isSubmitting}
-            />
+            <Button title='Submit' onPress={handleSubmit} disabled={loading} />
             <Text
               style={{ textAlign: 'center', ...styles.help, marginTop: 10 }}
             >

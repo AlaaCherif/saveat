@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
 import React, { useState } from 'react';
 import Button from './UI/Button';
 import { Formik } from 'formik';
@@ -42,7 +42,7 @@ const LoginForm = ({ next }) => {
   };
 
   return (
-    <View>
+    <KeyboardAvoidingView>
       <Formik
         initialValues={userCreds}
         validationSchema={validationSchema}
@@ -108,7 +108,7 @@ const LoginForm = ({ next }) => {
           );
         }}
       </Formik>
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 

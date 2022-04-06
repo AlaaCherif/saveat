@@ -11,15 +11,18 @@ import { verifySignup } from '../api/api.user';
 const EmailVerification = ({ route, navigation }) => {
   const [error, setError] = useState();
   const [code, setCode] = useState('');
+  const [loading, setLoading] = useState(false);
   const handleChange = text => {
     setCode(text);
   };
   const verifyAccount = async () => {
+    setLoading(true);
     const res = await verifySignup({ code: code });
     if (res === 'true') {
       console.log('SIGN UP SUCCESSFUL !');
       next();
     } else {
+      setLoading(false);
       setError(res);
     }
   };
@@ -42,7 +45,6 @@ const EmailVerification = ({ route, navigation }) => {
           placeholder='Enter code'
           value={code}
           onChangeText={handleChange}
-          // keyboardType='number-pad'
         />
         <Text style={{ ...styles.help, marginVertical: 10 }}>
           <View>
@@ -51,7 +53,11 @@ const EmailVerification = ({ route, navigation }) => {
         </Text>
         <Text style={{ ...styles.help, marginVertical: 5 }}>Resend code ?</Text>
         <Text>{error && error.toString()}</Text>
-        <Button title='Verify Email' onPress={verifyAccount} />
+        <Button
+          title='Verify Email'
+          onPress={verifyAccount}
+          disabled={loading}
+        />
       </View>
     </Page>
   );
