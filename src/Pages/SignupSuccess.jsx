@@ -6,7 +6,7 @@ import Progress from './../UI/Icons/Progress';
 const SignupSuccess = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.popToTop();
+      navigation.replace('LoggedHome');
     }, 2000);
   }, []);
 

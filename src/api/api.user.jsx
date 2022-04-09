@@ -29,12 +29,13 @@ export const signUp = async data => {
           'accessToken',
           res.data.accessToken
         );
-        return 'true';
+        return accessToken;
       } else if (res.data.status === 'error') {
         return res.data.error;
       }
     })
     .catch(err => {
+      console.log(err);
       return false;
     });
 };
@@ -72,4 +73,62 @@ export const loggedIn = async () => {
   } else {
     return false;
   }
+};
+
+export const logout = async () => {
+  const authToken = await AsyncStorageLib.getItem('authToken');
+  return await axios
+    .post(
+      `${api}/users/logout`,
+      {},
+      {
+        headers: {
+          authorization: 'Bearer ' + authToken,
+        },
+      }
+    )
+    .then(res => {
+      if (res.data.status === 'success') {
+        AsyncStorageLib.removeItem('authToken');
+        return true;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      return false;
+    });
+};
+// First Form
+export const forgotPassword = async data => {
+  return axios
+    .post(`${api}/users/forgotPassword`, data)
+    .then(res => {
+      if (res.data.status === 'success') {
+        return true;
+      } else {
+        return false;
+      }
+    })
+    .catch(err => {
+      return false;
+    });
+};
+
+// Second Form
+export const resetPassword = async (password, params) => {
+  console.log(password);
+  return await axios
+    .patch(`${api}/users/resetPassword/${params.token}`, password)
+    .then(res => {
+      if (res.data.status === 'success') {
+        return true;
+        //changed
+      } else {
+        return false;
+        //invalid token or has expired
+      }
+    })
+    .catch(err => {
+      return false;
+    });
 };

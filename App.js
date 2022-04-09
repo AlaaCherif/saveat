@@ -10,6 +10,8 @@ import SignupSuccess from './src/Pages/SignupSuccess';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import { View, ActivityIndicator } from 'react-native';
 import { AuthProvider } from './src/context/AuthProvider';
+import { StyleSheet } from 'react-native';
+import ForgotPasswordPage from './src/Pages/ForgotPasswordPage';
 
 const App = () => {
   const [token, setToken] = useState();
@@ -24,8 +26,8 @@ const App = () => {
   const Stack = createNativeStackNavigator();
   if (loading)
     return (
-      <View>
-        <ActivityIndicator />
+      <View style={styles.center}>
+        <ActivityIndicator color='#4DAAAA' size='large' />
       </View>
     );
   return (
@@ -55,6 +57,11 @@ const App = () => {
               component={EmailVerification}
               options={{ headerTitle: props => <Title {...props} /> }}
             />
+            <Stack.Screen
+              name='ForgotPassword'
+              component={ForgotPasswordPage}
+              options={{ headerTitle: props => <Title {...props} /> }}
+            />
 
             <Stack.Screen
               name='Success'
@@ -74,5 +81,12 @@ const App = () => {
     </AuthProvider>
   );
 };
+const styles = StyleSheet.create({
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 export default App;

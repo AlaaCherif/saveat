@@ -1,12 +1,14 @@
 import { StyleSheet, Text, View, Switch } from 'react-native';
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/Icons/LoginLogo';
 import LoginForm from '../LoginForm';
 import SignupForm from '../SignupForm';
 import AddLogo from '../UI/Icons/AddLogo';
+import AuthContext from '../context/AuthProvider';
 
 const AccountAccess = ({ route, navigation }) => {
+  const { auth } = useContext(AuthContext);
   const goVerif = params => {
     navigation.navigate('EmailVerification', params);
   };
@@ -16,6 +18,15 @@ const AccountAccess = ({ route, navigation }) => {
   const goHome = email => {
     navigation.navigate('Home');
   };
+  const toForgotPassword = () => {
+    navigation.navigate('ForgotPassword');
+  };
+  useEffect(() => {
+    if (auth.email) {
+      navigation.replace('LoggedHome');
+    }
+  }, [auth]);
+
   return (
     <Page second='true'>
       <View style={styles.container}>
@@ -26,7 +37,7 @@ const AccountAccess = ({ route, navigation }) => {
           </Text>
         </View>
         {route.params.login ? (
-          <LoginForm next={goHome} />
+          <LoginForm next={goHome} forgotPassword={toForgotPassword} />
         ) : (
           <SignupForm next={goVerif} />
         )}

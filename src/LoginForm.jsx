@@ -1,4 +1,10 @@
-import { StyleSheet, Text, View, KeyboardAvoidingView } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  KeyboardAvoidingView,
+  TouchableOpacity,
+} from 'react-native';
 import React, { useState, useContext } from 'react';
 import Button from './UI/Button';
 import { Formik } from 'formik';
@@ -20,7 +26,7 @@ const validationSchema = Yup.object({
   password: Yup.string().required('You need to input your password!'),
 });
 
-const LoginForm = ({ next }) => {
+const LoginForm = ({ next, forgotPassword }) => {
   const { setAuth } = useContext(AuthContext);
   const [showPassword, setshowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -40,7 +46,7 @@ const LoginForm = ({ next }) => {
       }, 1000);
     } else {
       setAuth({ email: usefulValues.email, token: res });
-      next(usefulValues.email);
+      next();
     }
   };
 
@@ -92,9 +98,11 @@ const LoginForm = ({ next }) => {
                   disabled={loading}
                 />
                 <Text style={styles.error}>{failed && failed.toString()}</Text>
-                <Text style={{ ...styles.help, marginTop: 10 }}>
-                  Forgot your password ?
-                </Text>
+                <TouchableOpacity onPress={forgotPassword}>
+                  <Text style={{ ...styles.help, marginTop: 10 }}>
+                    Forgot your password ?
+                  </Text>
+                </TouchableOpacity>
                 <Text
                   style={{ textAlign: 'center', ...styles.help, marginTop: 10 }}
                 >

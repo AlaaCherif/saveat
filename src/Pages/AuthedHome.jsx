@@ -2,15 +2,14 @@ import { StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useContext } from 'react';
 import Page from '../Page';
 import Button from '../UI/Button';
-import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import AuthContext from '../context/AuthProvider';
+import { logout } from '../api/api.user';
 
 const AuthedHome = ({ navigation }) => {
   const { auth, setAuth } = useContext(AuthContext);
-  const logout = async () => {
-    setAuth({});
-    await AsyncStorageLib.removeItem('authToken').then(() => {
-      // navigation.replace('Home');
+  const handleLogout = async () => {
+    await logout().then(() => {
+      setAuth({});
     });
   };
   useEffect(async () => {
@@ -23,7 +22,7 @@ const AuthedHome = ({ navigation }) => {
       <View style={styles.container}>
         <Text>You re logged in hi </Text>
         <Text>{auth.email}</Text>
-        <Button title='LOGOUT' onPress={logout} />
+        <Button title='LOGOUT' onPress={handleLogout} />
       </View>
     </Page>
   );

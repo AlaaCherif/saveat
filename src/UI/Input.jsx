@@ -12,25 +12,28 @@ const Input = props => {
   const [focused, setFocused] = useState(false);
   return (
     <View style={styles.container}>
-      <View style={styles.errorAndLabel}>
-        <Text style={styles.label}>{props.label}</Text>
-      </View>
+      {props.label ? (
+        <View style={styles.errorAndLabel}>
+          <Text style={styles.label}>{props.label}</Text>
+        </View>
+      ) : null}
       <View>
         <TextInput
           style={[
             styles.input,
             styles.password,
+            props.error && focused ? styles.inputError : null,
             focused ? styles.focusedInput : null,
-            props.error ? styles.inputError : null,
           ]}
+          {...props}
           onFocus={() => {
             setFocused(true);
           }}
           onBlur={() => {
+            console.log('blurred');
             setFocused(false);
           }}
           autoCapitalize='none'
-          {...props}
         />
         {props.label === 'Password:' || props.label === 'Confirm Password:' ? (
           <TouchableWithoutFeedback onPress={props.toggle}>
@@ -55,8 +58,8 @@ const styles = StyleSheet.create({
   },
   inputError: {
     borderColor: 'red',
-    backgroundColor: '#FFBCBC',
-    borderWidth: 1,
+    // backgroundColor: '#FFBCBC',
+    borderWidth: 1.3,
   },
   input: {
     borderColor: '#ECEEEE',

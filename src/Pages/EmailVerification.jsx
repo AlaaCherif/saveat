@@ -19,7 +19,6 @@ const EmailVerification = ({ route, navigation }) => {
     setLoading(true);
     const res = await verifySignup({ code: code });
     if (res === 'true') {
-      console.log('SIGN UP SUCCESSFUL !');
       next();
     } else {
       setLoading(false);

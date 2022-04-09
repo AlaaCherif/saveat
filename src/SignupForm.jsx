@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import Input from './UI/Input';
@@ -7,6 +7,7 @@ import Button from './UI/Button';
 import FbLogo from './UI/Icons/FbLogo';
 import Progress from './UI/Icons/Progress';
 import { signUp } from './api/api.user';
+import AuthContext from './context/AuthProvider';
 
 const newUser = {
   email: '',
@@ -24,16 +25,19 @@ const validationSchema = Yup.object({
     .required('Please confirm your password !'),
 });
 
-const SignupForm = ({ next }) => {
+const SignupForm = ({ next, loggedReplace }) => {
+  const { auth, setAuth } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+
   const submitHandler = async (values, formikActions) => {
     setLoading(true);
     if (values.password !== values.passwordConfirm) return;
     const usefulValues = { email: values.email, password: values.password };
     const res = await signUp(usefulValues);
-    if (res === 'true') {
+    if (res) {
+      setAuth({ email: usefulValues.email, token: res });
       next();
     } else {
       setLoading(false);

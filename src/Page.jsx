@@ -1,22 +1,17 @@
-import {
-  StyleSheet,
-  ImageBackground,
-  Animated,
-  KeyboardAvoidingView,
-} from 'react-native';
+import { StyleSheet, ImageBackground, Animated } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import bare from '../assets/bare.png';
 import React, { useRef, useEffect } from 'react';
 import Svg, { Path, Rect } from 'react-native-svg';
 import KeyboardAvoidingWrapper from './UI/KeyboardAvoidingWrapper';
-import Progress from './UI/Icons/Progress';
+import Easing from 'react-native/Libraries/Animated/Easing';
 
 const Page = ({ children, second, third, noAnimation }) => {
   let progress = -100;
   if (!noAnimation) {
     progress = third
       ? useRef(new Animated.Value(-350)).current
-      : useRef(new Animated.Value(-730)).current;
+      : useRef(new Animated.Value(-930)).current;
   }
 
   useEffect(() => {
@@ -30,15 +25,19 @@ const Page = ({ children, second, third, noAnimation }) => {
         toValue: -350,
         useNativeDriver: false,
         duration: 750,
+        easing: Easing.elastic(),
       }).start();
     }, 200);
   };
   const startSecondAnimation = () => {
-    Animated.timing(progress, {
-      toValue: -100,
-      useNativeDriver: false,
-      duration: 750,
-    }).start();
+    setTimeout(() => {
+      Animated.timing(progress, {
+        toValue: -100,
+        useNativeDriver: false,
+        duration: 750,
+        easing: Easing.elastic(),
+      }).start();
+    }, 200);
   };
   return (
     <KeyboardAvoidingWrapper>
