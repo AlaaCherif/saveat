@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Switch } from 'react-native';
+import { StyleSheet, Text, View, Switch, ScrollView } from 'react-native';
 import React, { useEffect, useContext } from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/Icons/LoginLogo';
@@ -29,35 +29,37 @@ const AccountAccess = ({ route, navigation }) => {
 
   return (
     <Page second='true'>
-      <View style={styles.container}>
-        <View style={styles.titleContainer}>
-          <LoginLogo />
-          <Text style={styles.title}>
-            {route.params.login ? 'Log in' : 'Sign up'}
-          </Text>
+      <ScrollView>
+        <View style={styles.container}>
+          <View style={styles.titleContainer}>
+            <LoginLogo />
+            <Text style={styles.title}>
+              {route.params.login ? 'Log in' : 'Sign up'}
+            </Text>
+          </View>
+          {route.params.login ? (
+            <LoginForm next={goHome} forgotPassword={toForgotPassword} />
+          ) : (
+            <SignupForm next={goVerif} />
+          )}
         </View>
-        {route.params.login ? (
-          <LoginForm next={goHome} forgotPassword={toForgotPassword} />
-        ) : (
-          <SignupForm next={goVerif} />
-        )}
-      </View>
-      <View behavior='' style={styles.switchContainer}>
-        {route.params.login ? (
-          <LoginLogo width='20' height='24' />
-        ) : (
-          <AddLogo style={{ marginRight: 2 }} />
-        )}
+        <View behavior='' style={styles.switchContainer}>
+          {route.params.login ? (
+            <LoginLogo width='20' height='24' />
+          ) : (
+            <AddLogo style={{ marginRight: 2 }} />
+          )}
 
-        <Switch
-          trackColor={{ false: '#4DAAAA', true: '#4DAAAA' }}
-          ios_backgroundColor='#4DAAAA'
-          onValueChange={changeType}
-          value={route.params.login}
-          thumbColor='#f4f3f4'
-          style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
-        />
-      </View>
+          <Switch
+            trackColor={{ false: '#4DAAAA', true: '#4DAAAA' }}
+            ios_backgroundColor='#4DAAAA'
+            onValueChange={changeType}
+            value={route.params.login}
+            thumbColor='#f4f3f4'
+            style={{ transform: [{ scaleX: 1.3 }, { scaleY: 1.3 }] }}
+          />
+        </View>
+      </ScrollView>
     </Page>
   );
 };

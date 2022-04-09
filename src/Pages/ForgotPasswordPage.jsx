@@ -58,6 +58,7 @@ const ForgotPasswordPage = ({ navigation }) => {
                   onChangeText={handleChange('email')}
                   error={touched.email && errors.email}
                 />
+                <Text>{error && error.toString()}</Text>
                 <Button
                   title='Reset Password'
                   onPress={handleSubmit}

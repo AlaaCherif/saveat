@@ -11,9 +11,7 @@ function KeyboardAvoidingWrapper({ children }) {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }}>
       <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flex: 1 }}>
-        {/* <TouchableWithoutFeedback onPress={Keyboard.dismiss}> */}
         {children}
-        {/* </TouchableWithoutFeedback> */}
       </ScrollView>
     </KeyboardAvoidingView>
   );
