@@ -46,6 +46,14 @@ const Home = ({ navigation }) => {
           color='black'
           onPress={goSignup}
         />
+        <Button
+          title='Profile'
+          backgroundColor='white'
+          color='black'
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+        />
       </View>
     </Page>
   );

@@ -12,6 +12,8 @@ import { View, ActivityIndicator } from 'react-native';
 import { AuthProvider } from './src/context/AuthProvider';
 import { StyleSheet } from 'react-native';
 import ForgotPasswordPage from './src/Pages/ForgotPasswordPage';
+import Profile from './src/Pages/Profile';
+import { registerRootComponent } from 'expo';
 
 const App = () => {
   const [token, setToken] = useState();
@@ -73,6 +75,11 @@ const App = () => {
               component={AuthedHome}
               options={{ headerTitle: props => <Title {...props} /> }}
             />
+            <Stack.Screen
+              name='Profile'
+              component={Profile}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         ) : (
           <AuthedHome />
@@ -88,5 +95,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-
 export default App;
