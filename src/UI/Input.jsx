@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import React, { useState } from 'react';
 import Eye from './Icons/Eye';
+import { Calendar } from './Icons/ProfileLogos';
 
 const Input = props => {
   const [focused, setFocused] = useState(false);
@@ -19,6 +20,7 @@ const Input = props => {
       ) : null}
       <View>
         <TextInput
+          multiline={true}
           style={[
             styles.input,
             styles.password,
@@ -40,6 +42,7 @@ const Input = props => {
             <Eye closed={!props.showPassword} style={styles.eye} />
           </TouchableWithoutFeedback>
         ) : null}
+        {props.label === 'Birth Date' ? <Calendar style={styles.eye} /> : null}
       </View>
 
       {props.error ? <Text style={styles.error}>{props.error}</Text> : null}
@@ -87,7 +90,7 @@ const styles = StyleSheet.create({
   eye: {
     position: 'absolute',
     right: 7,
-    top: '15%',
+    top: '10%',
     padding: 5,
     borderRadius: 10,
   },

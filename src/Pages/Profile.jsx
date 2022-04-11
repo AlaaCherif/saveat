@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import EditProfile from './ProfilePages/EditProfile';
 import CustomDrawer from '../UI/CustomDrawer';
@@ -10,12 +9,12 @@ import { ProfileLogo, SettingsLogo } from '../UI/Icons/ProfileLogos';
 const Drawer = createDrawerNavigator();
 const Profile = () => {
   return (
-    //     <NavigationContainer>
     <Drawer.Navigator
       screenOptions={{
         drawerStyle: { width: 80 },
         drawerItemStyle: { justifyContent: 'center', alignItems: 'center' },
         drawerActiveBackgroundColor: '#4DAAAA',
+        headerShadowVisible: false,
       }}
       drawerContent={props => <CustomDrawer {...props} />}
     >
@@ -34,7 +33,6 @@ const Profile = () => {
         }}
       />
     </Drawer.Navigator>
-    //   </NavigationContainer>
   );
 };
 
