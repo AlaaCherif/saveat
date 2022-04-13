@@ -34,7 +34,9 @@ const Profile = ({ navigation }) => {
           drawerLabel: ProfileLogo,
         }}
       >
-        {props => <EditProfile goHome={() => navigation.replace('Home')} />}
+        {props => (
+          <EditProfile {...props} goHome={() => navigation.replace('Home')} />
+        )}
       </Drawer.Screen>
       <Drawer.Screen
         name='Settings'

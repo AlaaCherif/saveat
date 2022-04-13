@@ -90,6 +90,7 @@ export const logout = async () => {
     .then(res => {
       if (res.data.status === 'success') {
         AsyncStorageLib.removeItem('authToken');
+        AsyncStorageLib.removeItem('email');
         return true;
       }
     })
