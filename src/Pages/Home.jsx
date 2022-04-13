@@ -4,7 +4,6 @@ import Page from '../Page';
 import image from '../../assets/splash.png';
 import Dash from '../Icons/Dash';
 import Button from '../UI/Button';
-import AsyncStorageLib from '@react-native-async-storage/async-storage';
 import AuthContext from '../context/AuthProvider';
 
 const Home = ({ navigation }) => {
@@ -18,7 +17,7 @@ const Home = ({ navigation }) => {
   const [logged, setLogged] = useState();
 
   useEffect(() => {
-    console.log(auth.email);
+    // console.log(auth.email);
     if (auth.email) {
       navigation.replace('LoggedHome');
     }
@@ -45,14 +44,6 @@ const Home = ({ navigation }) => {
           backgroundColor='white'
           color='black'
           onPress={goSignup}
-        />
-        <Button
-          title='Profile'
-          backgroundColor='white'
-          color='black'
-          onPress={() => {
-            navigation.navigate('Profile');
-          }}
         />
       </View>
     </Page>

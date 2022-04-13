@@ -1,13 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useDispatch } from 'react';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { Back } from './Icons/ProfileLogos';
-import { DrawerActions } from '@react-navigation/native';
-
-const CustomDrawer = props => {
+const CustomDrawer = ({ navigation }) => {
   return (
     <View
       style={{
@@ -21,7 +19,6 @@ const CustomDrawer = props => {
         <TouchableOpacity
           onPress={() => {
             console.log('pressed');
-            DrawerActions.toggleDrawer();
           }}
         >
           <Back />

@@ -73,7 +73,7 @@ const App = () => {
             <Stack.Screen
               name='LoggedHome'
               component={AuthedHome}
-              options={{ headerTitle: props => <Title {...props} /> }}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name='Profile'

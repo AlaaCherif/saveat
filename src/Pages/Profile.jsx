@@ -1,13 +1,21 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import { StyleSheet } from 'react-native';
+import React, { useEffect, useContext } from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import EditProfile from './ProfilePages/EditProfile';
 import CustomDrawer from '../UI/CustomDrawer';
 import AccountSettings from './ProfilePages/AccountSettings';
 import { ProfileLogo, SettingsLogo } from '../UI/Icons/ProfileLogos';
+import AuthContext from '../context/AuthProvider';
 
 const Drawer = createDrawerNavigator();
-const Profile = () => {
+
+const Profile = ({ navigation }) => {
+  const { auth } = useContext(AuthContext);
+  useEffect(() => {
+    if (!auth.email) {
+      navigation.replace('Home');
+    }
+  });
   return (
     <Drawer.Navigator
       screenOptions={{
@@ -15,6 +23,8 @@ const Profile = () => {
         drawerItemStyle: { justifyContent: 'center', alignItems: 'center' },
         drawerActiveBackgroundColor: '#4DAAAA',
         headerShadowVisible: false,
+        headerShown: false,
+        swipeEnabled: false,
       }}
       drawerContent={props => <CustomDrawer {...props} />}
     >

@@ -1,11 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
+import ProfilePage from './ProfilePage';
 
 const AccountSettings = () => {
   return (
-    <View>
-      <Text>AccountSettings</Text>
-    </View>
+    <ProfilePage>
+      <View>
+        <Text>FU</Text>
+      </View>
+    </ProfilePage>
   );
 };
 

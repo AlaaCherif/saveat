@@ -3,10 +3,15 @@ import React, { useState } from 'react';
 import Input from '../../UI/Input';
 import DateInput from '../../UI/DateInput';
 import Button from './../../UI/Button';
+import ProfilePage from './ProfilePage';
 
-const EditProfile = () => {
+const EditProfile = ({ navigation }) => {
+  const expand = () => {
+    navigation.openDrawer();
+  };
   const [data, setData] = useState({ date: null });
   const [date, setDate] = useState();
+
   const changeFN = name => {
     setData(previousData => {
       return { ...previousData, firstName: name };
@@ -28,32 +33,17 @@ const EditProfile = () => {
     });
   };
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>PROFILE</Text>
+    <ProfilePage expand={expand}>
       <Input label='First Name' onChangeText={changeFN} />
       <Input label='Last Name' onChangeText={changeLN} />
       <Input label='Phone Number' onChangeText={changePhone} />
       <DateInput date={date} setDate={setDate} />
       <Input label='Address' onChangeText={changeAddress} />
       <Button backgroundColor='#FFBCBC' title='Save' />
-    </View>
+    </ProfilePage>
   );
 };
 
 export default EditProfile;
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flex: 1,
-    backgroundColor: 'white',
-  },
-  title: {
-    fontSize: 40,
-    letterSpacing: 10,
-    color: '#4DAAAA',
-    fontWeight: '100',
-    marginBottom: 50,
-  },
-});
+const styles = StyleSheet.create({});

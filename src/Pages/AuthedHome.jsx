@@ -22,6 +22,14 @@ const AuthedHome = ({ navigation }) => {
       <View style={styles.container}>
         <Text>You re logged in hi </Text>
         <Text>{auth.email}</Text>
+        <Button
+          title='Profile'
+          backgroundColor='#FFBCBC'
+          color='white'
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+        />
         <Button title='LOGOUT' onPress={handleLogout} />
       </View>
     </Page>

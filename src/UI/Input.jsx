@@ -20,22 +20,21 @@ const Input = props => {
       ) : null}
       <View>
         <TextInput
-          multiline={true}
           style={[
             styles.input,
             styles.password,
             props.error && focused ? styles.inputError : null,
             focused ? styles.focusedInput : null,
           ]}
-          {...props}
           onFocus={() => {
             setFocused(true);
           }}
           onBlur={() => {
-            console.log('blurred');
+            // console.log('blurred');
             setFocused(false);
           }}
           autoCapitalize='none'
+          {...props}
         />
         {props.label === 'Password:' || props.label === 'Confirm Password:' ? (
           <TouchableWithoutFeedback onPress={props.toggle}>
