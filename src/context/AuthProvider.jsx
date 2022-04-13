@@ -7,6 +7,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(async () => {
     const user = await AsyncStorageLib.getItem('email');
     const token = await AsyncStorageLib.getItem('authToken');
+    // const user = await AsyncStorageLib.multiGet(['email', 'authToken']).then(
+    //   () => {
+
+    //   }
+    // );
     if (user) {
       setAuth({ email: user, token: token });
     }

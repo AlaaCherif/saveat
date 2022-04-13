@@ -7,7 +7,6 @@ import ProfilePage from './ProfilePage';
 
 const EditProfile = ({ navigation, goHome }) => {
   const expand = () => {
-    console.log(navigation);
     navigation.openDrawer();
   };
   const [data, setData] = useState({ date: null });

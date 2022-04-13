@@ -35,7 +35,10 @@ const Profile = ({ navigation }) => {
         }}
       >
         {props => (
-          <EditProfile {...props} goHome={() => navigation.replace('Home')} />
+          <EditProfile
+            {...props}
+            goHome={() => navigation.replace('LoggedHome')}
+          />
         )}
       </Drawer.Screen>
       <Drawer.Screen
