@@ -7,8 +7,12 @@ export const login = async data => {
     .post(`${api}/users/login`, data)
     .then(async res => {
       if (res.status === 200) {
-        await AsyncStorageLib.setItem('authToken', res.data.token);
-        await AsyncStorageLib.setItem('email', data.email);
+        // await AsyncStorageLib.setItem('authToken', res.data.token);
+        // await AsyncStorageLib.setItem('email', data.email);
+        await AsyncStorageLib.setItem(
+          'user',
+          JSON.stringify({ email: data.email, token: res.data.token })
+        );
         return res.data.token;
       } else {
         console.log('api error during login');
@@ -55,7 +59,13 @@ export const verifySignup = async data => {
     .then(async res => {
       console.log(res);
       if (res.data.status === 'success') {
-        await AsyncStorageLib.setItem('authToken', res.data.token);
+        await AsyncStorageLib.setItem(
+          'user',
+          JSON.stringify({
+            token: res.data.token,
+            email: 'not implemented yet',
+          })
+        );
         return 'true';
       } else if (res.data.status === 'error') {
         return res.data.error;
@@ -67,8 +77,8 @@ export const verifySignup = async data => {
     });
 };
 export const loggedIn = async () => {
-  const authToken = await AsyncStorageLib.getItem('authToken');
-  if (authToken && authToken !== undefined) {
+  const user = await AsyncStorageLib.getItem('user');
+  if (user.token && user.token !== undefined) {
     return true;
   } else {
     return false;
@@ -76,7 +86,8 @@ export const loggedIn = async () => {
 };
 
 export const logout = async () => {
-  const authToken = await AsyncStorageLib.getItem('authToken');
+  const user = await AsyncStorageLib.getItem('user');
+  let authToken = user.token;
   return await axios
     .post(
       `${api}/users/logout`,
@@ -89,8 +100,7 @@ export const logout = async () => {
     )
     .then(res => {
       if (res.data.status === 'success') {
-        AsyncStorageLib.removeItem('authToken');
-        AsyncStorageLib.removeItem('email');
+        AsyncStorageLib.removeItem('user');
         return true;
       }
     })
@@ -111,6 +121,7 @@ export const forgotPassword = async data => {
       }
     })
     .catch(err => {
+      console.log(err);
       return false;
     });
 };
@@ -130,6 +141,7 @@ export const resetPassword = async (password, params) => {
       }
     })
     .catch(err => {
+      console.log(err);
       return false;
     });
 };

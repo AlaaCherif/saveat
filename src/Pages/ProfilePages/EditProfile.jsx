@@ -33,7 +33,7 @@ const EditProfile = ({ navigation, goHome }) => {
     });
   };
   return (
-    <ProfilePage expand={expand} goHome={goHome}>
+    <ProfilePage expand={expand} goHome={goHome} title='PROFILE'>
       <Input label='First Name' onChangeText={changeFN} />
       <Input label='Last Name' onChangeText={changeLN} />
       <Input label='Phone Number' onChangeText={changePhone} />

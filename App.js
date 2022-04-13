@@ -19,7 +19,7 @@ const App = () => {
   const [token, setToken] = useState();
   const [loading, setLoading] = useState(true);
   useEffect(async () => {
-    setToken(await AsyncStorageLib.getItem('authToken'));
+    setToken(await AsyncStorageLib.getItem('user'));
     setTimeout(() => {
       setLoading(false);
     }, 1000);

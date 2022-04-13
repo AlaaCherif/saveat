@@ -6,6 +6,7 @@ import CustomDrawer from '../UI/CustomDrawer';
 import AccountSettings from './ProfilePages/AccountSettings';
 import { ProfileLogo, SettingsLogo } from '../UI/Icons/ProfileLogos';
 import AuthContext from '../context/AuthProvider';
+import ProfilePreview from './ProfilePages/ProfilePreview';
 
 const Drawer = createDrawerNavigator();
 
@@ -44,6 +45,13 @@ const Profile = ({ navigation }) => {
       <Drawer.Screen
         name='Settings'
         component={AccountSettings}
+        options={{
+          drawerLabel: SettingsLogo,
+        }}
+      />
+      <Drawer.Screen
+        name='Preview'
+        component={ProfilePreview}
         options={{
           drawerLabel: SettingsLogo,
         }}

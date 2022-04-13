@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Expand, HomeLogo } from './../../UI/Icons/ProfileLogos';
 
-const ProfilePage = ({ children, expand, goHome }) => {
+const ProfilePage = ({ children, expand, goHome, title }) => {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
@@ -20,7 +20,7 @@ const ProfilePage = ({ children, expand, goHome }) => {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>PROFILE</Text>
+      <Text style={styles.title}>{title}</Text>
       {children}
     </View>
   );

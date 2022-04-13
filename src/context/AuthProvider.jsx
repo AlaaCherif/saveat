@@ -5,17 +5,13 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   useEffect(async () => {
-    const user = await AsyncStorageLib.getItem('email');
-    const token = await AsyncStorageLib.getItem('authToken');
-    // const user = await AsyncStorageLib.multiGet(['email', 'authToken']).then(
-    //   () => {
+    const userString = await AsyncStorageLib.getItem('user');
+    let user = JSON.parse(userString);
 
-    //   }
-    // );
     if (user) {
-      setAuth({ email: user, token: token });
+      setAuth({ email: user.email, token: user.token });
     }
-  });
+  }, []);
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
       {children}
