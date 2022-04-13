@@ -5,7 +5,7 @@ import {
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { Back } from './Icons/ProfileLogos';
-const CustomDrawer = ({ navigation }) => {
+const CustomDrawer = props => {
   return (
     <View
       style={{

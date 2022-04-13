@@ -30,11 +30,12 @@ const Profile = ({ navigation }) => {
     >
       <Drawer.Screen
         name='Edit'
-        component={EditProfile}
         options={{
           drawerLabel: ProfileLogo,
         }}
-      />
+      >
+        {props => <EditProfile goHome={() => navigation.replace('Home')} />}
+      </Drawer.Screen>
       <Drawer.Screen
         name='Settings'
         component={AccountSettings}

@@ -5,7 +5,7 @@ import DateInput from '../../UI/DateInput';
 import Button from './../../UI/Button';
 import ProfilePage from './ProfilePage';
 
-const EditProfile = ({ navigation }) => {
+const EditProfile = ({ navigation, goHome }) => {
   const expand = () => {
     navigation.openDrawer();
   };
@@ -33,7 +33,7 @@ const EditProfile = ({ navigation }) => {
     });
   };
   return (
-    <ProfilePage expand={expand}>
+    <ProfilePage expand={expand} goHome={goHome}>
       <Input label='First Name' onChangeText={changeFN} />
       <Input label='Last Name' onChangeText={changeLN} />
       <Input label='Phone Number' onChangeText={changePhone} />
