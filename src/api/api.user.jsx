@@ -77,9 +77,25 @@ export const verifySignup = async data => {
     });
 };
 export const loggedIn = async () => {
-  const user = await AsyncStorageLib.getItem('user');
-  if (user.token && user.token !== undefined) {
-    return true;
+  const user = JSON.parse(await AsyncStorageLib.getItem('user'));
+  let authToken = user.token;
+  if (authToken && authToken !== undefined) {
+    return await axios
+      .get(`${api}/users/test`, {
+        headers: {
+          authorization: 'Bearer ' + authToken,
+        },
+      })
+      .then(res => {
+        if (res.data.status === 'success') {
+          return user;
+        } else {
+          return false;
+        }
+      })
+      .catch(err => {
+        return false;
+      });
   } else {
     return false;
   }

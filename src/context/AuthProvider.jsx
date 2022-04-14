@@ -1,15 +1,17 @@
 import { createContext, useState, useEffect } from 'react';
 import AsyncStorageLib from '@react-native-async-storage/async-storage';
-const AuthContext = createContext({});
+import { loggedIn } from '../api/api.user';
 
+const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   useEffect(async () => {
-    const userString = await AsyncStorageLib.getItem('user');
-    let user = JSON.parse(userString);
-
-    if (user) {
-      setAuth({ email: user.email, token: user.token });
+    const res = await loggedIn();
+    if (res) {
+      setAuth({ email: res.email, token: res.token });
+    } else {
+      await AsyncStorageLib.removeItem('user');
+      setAuth({});
     }
   }, []);
   return (

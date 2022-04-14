@@ -26,67 +26,64 @@ const App = () => {
   }, []);
 
   const Stack = createNativeStackNavigator();
+  let toRender;
   if (loading)
-    return (
+    toRender = (
       <View style={styles.center}>
         <ActivityIndicator color='#4DAAAA' size='large' />
       </View>
     );
-  return (
-    <AuthProvider>
+  else
+    toRender = (
       <NavigationContainer>
-        {token === null || true ? (
-          <Stack.Navigator
-            screenOptions={{
-              headerTransparent: true,
-              animation: 'fade_from_bottom',
+        <Stack.Navigator
+          screenOptions={{
+            headerTransparent: true,
+            animation: 'fade_from_bottom',
+          }}
+        >
+          <Stack.Screen
+            name='Home'
+            component={Home}
+            options={{ headerTitle: props => <Title {...props} /> }}
+          />
+          <Stack.Screen
+            name='Login1'
+            component={AccountAccess}
+            options={{
+              headerTitle: props => <Title {...props} />,
             }}
-          >
-            <Stack.Screen
-              name='Home'
-              component={Home}
-              options={{ headerTitle: props => <Title {...props} /> }}
-            />
-            <Stack.Screen
-              name='Login1'
-              component={AccountAccess}
-              options={{
-                headerTitle: props => <Title {...props} />,
-              }}
-            />
-            <Stack.Screen
-              name='EmailVerification'
-              component={EmailVerification}
-              options={{ headerTitle: props => <Title {...props} /> }}
-            />
-            <Stack.Screen
-              name='ForgotPassword'
-              component={ForgotPasswordPage}
-              options={{ headerTitle: props => <Title {...props} /> }}
-            />
+          />
+          <Stack.Screen
+            name='EmailVerification'
+            component={EmailVerification}
+            options={{ headerTitle: props => <Title {...props} /> }}
+          />
+          <Stack.Screen
+            name='ForgotPassword'
+            component={ForgotPasswordPage}
+            options={{ headerTitle: props => <Title {...props} /> }}
+          />
 
-            <Stack.Screen
-              name='Success'
-              component={SignupSuccess}
-              options={{ headerTitle: props => <Title {...props} /> }}
-            />
-            <Stack.Screen
-              name='LoggedHome'
-              component={AuthedHome}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name='Profile'
-              component={Profile}
-              options={{ headerShown: false }}
-            />
-          </Stack.Navigator>
-        ) : (
-          <AuthedHome />
-        )}
+          <Stack.Screen
+            name='Success'
+            component={SignupSuccess}
+            options={{ headerTitle: props => <Title {...props} /> }}
+          />
+          <Stack.Screen
+            name='LoggedHome'
+            component={AuthedHome}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Profile'
+            component={Profile}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
       </NavigationContainer>
-    </AuthProvider>
-  );
+    );
+  return <AuthProvider>{toRender}</AuthProvider>;
 };
 const styles = StyleSheet.create({
   center: {
