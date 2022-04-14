@@ -2,21 +2,28 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { Expand, HomeLogo } from './../../UI/Icons/ProfileLogos';
 
-const ProfilePage = ({ children, expand, goHome, title }) => {
+const ProfilePage = ({
+  children,
+  expand,
+  goHome,
+  title,
+  backgroundColor,
+  color,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={{ ...styles.container, backgroundColor: backgroundColor }}>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={expand}
           style={{ padding: 10, marginLeft: 20 }}
         >
-          <Expand />
+          <Expand color={color} />
         </TouchableOpacity>
         <TouchableOpacity
           onPress={goHome}
           style={{ padding: 10, marginRight: 20 }}
         >
-          <HomeLogo />
+          <HomeLogo color={color} />
         </TouchableOpacity>
       </View>
 

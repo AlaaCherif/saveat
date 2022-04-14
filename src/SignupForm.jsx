@@ -63,7 +63,6 @@ const SignupForm = ({ next, loggedReplace }) => {
         touched,
         handleBlur,
         handleSubmit,
-        isSubmitting,
       }) => {
         const { email, password, passwordConfirm } = values;
         return (
@@ -75,6 +74,7 @@ const SignupForm = ({ next, loggedReplace }) => {
               value={email}
               onBlur={handleBlur('email')}
               onChangeText={handleChange('email')}
+              editable={!loading}
             />
             <Input
               error={touched.password && errors.password}
@@ -85,6 +85,7 @@ const SignupForm = ({ next, loggedReplace }) => {
               secureTextEntry={!showPassword}
               toggle={toggleShowPassword}
               showPassword={showPassword}
+              editable={!loading}
             />
             {!errors.password ? (
               <Text style={styles.help}>
@@ -100,6 +101,7 @@ const SignupForm = ({ next, loggedReplace }) => {
               secureTextEntry={!showConfirm}
               toggle={toggleShowConfirm}
               showPassword={showConfirm}
+              editable={!loading}
             />
             <Button title='Submit' onPress={handleSubmit} disabled={loading} />
             <Text

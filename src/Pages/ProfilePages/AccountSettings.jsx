@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import ProfilePage from './ProfilePage';
 import CustomSwitch from '../../UI/CustomSwitch';
 import ChangePassword from './AccountSettingsForms/ChangePassword';
+import { ScrollView } from 'react-native-gesture-handler';
+import ChangeEmail from './AccountSettingsForms/ChangeEmail';
 
 const AccountSettings = ({ navigation }) => {
   const [getSelectionMode, setSelectionMode] = useState(1);
@@ -18,7 +20,18 @@ const AccountSettings = ({ navigation }) => {
         getSelectionMode={getSelectionMode}
         setSelectionMode={setSelectionMode}
       />
-      <Text>{getSelectionMode == 2 ? 'Email' : <ChangePassword />}</Text>
+      <ScrollView
+        style={{
+          width: '100%',
+          marginTop: 30,
+        }}
+        contentContainerStyle={{
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        {getSelectionMode == 2 ? <ChangeEmail /> : <ChangePassword />}
+      </ScrollView>
     </ProfilePage>
   );
 };

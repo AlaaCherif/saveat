@@ -36,9 +36,10 @@ const Input = props => {
           autoCapitalize='none'
           {...props}
         />
-        {props.label === 'Password:' || props.label === 'Confirm Password:' ? (
+        {(props.label && props.label.includes('Password')) ||
+        props.label === 'Confirm' ? (
           <TouchableWithoutFeedback onPress={props.toggle}>
-            <Eye closed={!props.showPassword} style={styles.eye} />
+            <Eye closed={props.secureTextEntry} style={styles.eye} />
           </TouchableWithoutFeedback>
         ) : null}
         {props.label === 'Birth Date' ? <Calendar style={styles.eye} /> : null}

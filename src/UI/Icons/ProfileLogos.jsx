@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import Svg, { Path, Line } from 'react-native-svg';
+import Svg, { Path, Line, Rect } from 'react-native-svg';
 
 export const ProfileLogo = () => {
   return (
@@ -88,7 +88,7 @@ export const Calendar = props => {
   );
 };
 
-export const Expand = () => {
+export const Expand = ({ color }) => {
   return (
     <Svg
       width='34'
@@ -99,7 +99,7 @@ export const Expand = () => {
     >
       <Path
         d='M1 1H33'
-        stroke='#4DAAAA'
+        stroke={color ? color : '#4DAAAA'}
         strokeWidth='2'
         stroke-linecap='round'
       />
@@ -108,13 +108,13 @@ export const Expand = () => {
         y1='12'
         x2='32'
         y2='12'
-        stroke='#4DAAAA'
+        stroke={color ? color : '#4DAAAA'}
         strokeWidth='2'
         stroke-linecap='round'
       />
       <Path
         d='M1 25H33'
-        stroke='#4DAAAA'
+        stroke={color ? color : '#4DAAAA'}
         strokeWidth='2'
         stroke-linecap='round'
       />
@@ -122,7 +122,7 @@ export const Expand = () => {
   );
 };
 
-export const HomeLogo = () => {
+export const HomeLogo = ({ color }) => {
   return (
     <Svg
       width='32'
@@ -133,7 +133,7 @@ export const HomeLogo = () => {
     >
       <Path
         d='M31.5081 10.891L16.6933 0.223969C16.4915 0.0783605 16.2489 0 16 0C15.7511 0 15.5085 0.0783605 15.3067 0.223969L0.491852 10.891C0.33977 11.0007 0.215887 11.145 0.130383 11.3119C0.0448786 11.4788 0.000193831 11.6636 0 11.8511V30.8148C0 31.1291 0.124867 31.4306 0.347133 31.6529C0.569398 31.8751 0.870854 32 1.18519 32H30.8148C31.1291 32 31.4306 31.8751 31.6529 31.6529C31.8751 31.4306 32 31.1291 32 30.8148V11.8511C31.9998 11.6636 31.9551 11.4788 31.8696 11.3119C31.7841 11.145 31.6602 11.0007 31.5081 10.891ZM18.963 29.6295H13.037V18.9625H18.963V29.6295ZM29.6296 29.6295H21.3333V17.7772C21.3333 17.4629 21.2085 17.1614 20.9862 16.9391C20.7639 16.7169 20.4625 16.592 20.1481 16.592H11.8519C11.5375 16.592 11.2361 16.7169 11.0138 16.9391C10.7915 17.1614 10.6667 17.4629 10.6667 17.7772V29.6295H2.37037V12.4437L16 2.64184L29.6296 12.4437V29.6295Z'
-        fill='#4DAAAA'
+        fill={color ? color : '#4DAAAA'}
       />
     </Svg>
   );
@@ -166,6 +166,28 @@ export const EmailLogo = ({ fill }) => {
       <Path
         d='M19 4H5C4.20435 4 3.44129 4.31607 2.87868 4.87868C2.31607 5.44129 2 6.20435 2 7V17C2 17.7956 2.31607 18.5587 2.87868 19.1213C3.44129 19.6839 4.20435 20 5 20H19C19.7956 20 20.5587 19.6839 21.1213 19.1213C21.6839 18.5587 22 17.7956 22 17V7C22 6.20435 21.6839 5.44129 21.1213 4.87868C20.5587 4.31607 19.7956 4 19 4ZM18.33 6L12 10.75L5.67 6H18.33ZM19 18H5C4.73478 18 4.48043 17.8946 4.29289 17.7071C4.10536 17.5196 4 17.2652 4 17V7.25L11.4 12.8C11.5731 12.9298 11.7836 13 12 13C12.2164 13 12.4269 12.9298 12.6 12.8L20 7.25V17C20 17.2652 19.8946 17.5196 19.7071 17.7071C19.5196 17.8946 19.2652 18 19 18Z'
         fill={fill}
+      />
+    </Svg>
+  );
+};
+
+export const Rectangle = () => {
+  return (
+    <Svg
+      width='192'
+      height='192'
+      viewBox='0 0 192 192'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <Rect
+        x='-10'
+        y='96.066'
+        width='150'
+        height='150'
+        rx='25'
+        transform='rotate(-45 -10 96.066)'
+        fill='white'
       />
     </Svg>
   );

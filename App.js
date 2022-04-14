@@ -14,6 +14,7 @@ import { StyleSheet } from 'react-native';
 import ForgotPasswordPage from './src/Pages/ForgotPasswordPage';
 import Profile from './src/Pages/Profile';
 import { registerRootComponent } from 'expo';
+import { StatusBar } from 'expo-status-bar';
 
 const App = () => {
   const [token, setToken] = useState();
@@ -83,7 +84,12 @@ const App = () => {
         </Stack.Navigator>
       </NavigationContainer>
     );
-  return <AuthProvider>{toRender}</AuthProvider>;
+  return (
+    <AuthProvider>
+      {toRender}
+      <StatusBar />
+    </AuthProvider>
+  );
 };
 const styles = StyleSheet.create({
   center: {

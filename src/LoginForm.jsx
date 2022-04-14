@@ -75,6 +75,7 @@ const LoginForm = ({ next, forgotPassword }) => {
                   value={email}
                   onBlur={handleBlur('email')}
                   onChangeText={handleChange('email')}
+                  editable={!loading}
                 />
                 <Input
                   error={touched.password && errors.password}
@@ -84,7 +85,7 @@ const LoginForm = ({ next, forgotPassword }) => {
                   onChangeText={handleChange('password')}
                   secureTextEntry={!showPassword}
                   toggle={toggleShow}
-                  showPassword={showPassword}
+                  editable={!loading}
                 />
                 {!errors.password ? (
                   <Text style={styles.help}>
