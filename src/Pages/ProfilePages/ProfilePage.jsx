@@ -11,7 +11,12 @@ const ProfilePage = ({
   color,
 }) => {
   return (
-    <View style={{ ...styles.container, backgroundColor: backgroundColor }}>
+    <View
+      style={{
+        ...styles.container,
+        backgroundColor: backgroundColor || 'white',
+      }}
+    >
       <View style={styles.buttonContainer}>
         <TouchableOpacity
           onPress={expand}
@@ -27,7 +32,7 @@ const ProfilePage = ({
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>{title}</Text>
+      {title ? <Text style={styles.title}>{title}</Text> : null}
       {children}
     </View>
   );
