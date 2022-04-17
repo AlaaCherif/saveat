@@ -23,8 +23,8 @@ const Input = props => {
           style={[
             styles.input,
             styles.password,
-            props.error && focused ? styles.inputError : null,
             focused ? styles.focusedInput : null,
+            props.error && focused ? styles.inputError : null,
           ]}
           onFocus={() => {
             setFocused(true);

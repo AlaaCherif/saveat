@@ -1,11 +1,18 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import React, { useDispatch } from 'react';
+import React, { useEffect } from 'react';
 import {
   DrawerContentScrollView,
   DrawerItemList,
 } from '@react-navigation/drawer';
 import { Back } from './Icons/ProfileLogos';
 const CustomDrawer = props => {
+  // useEffect(() => {
+  //   // if (props.state.routes[0].name === 'Settings') {
+  //   //   console.log('fuck you ');
+  //   // }
+  //   // console.log(props.navigation.isFocused);
+  // }, [props.state]);
+
   return (
     <View
       style={{
@@ -18,7 +25,8 @@ const CustomDrawer = props => {
       <View style={{ padding: 15 }}>
         <TouchableOpacity
           onPress={() => {
-            console.log('pressed');
+            props.navigation.closeDrawer();
+            // console.log(props.state);
           }}
         >
           <Back />

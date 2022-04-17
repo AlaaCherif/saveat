@@ -34,18 +34,25 @@ const LoginForm = ({ next, forgotPassword }) => {
   const toggleShow = () => {
     setshowPassword(prev => !prev);
   };
-  const submitHandler = async values => {
+  const submitHandler = async (values, formikAction) => {
     setfailed(false);
     setLoading(true);
+    if (values.password.length < 8) {
+      formikAction.resetForm();
+      setLoading(false);
+      return setfailed('Password must be at least 8 characters long');
+    }
     let usefulValues = { email: values.email, password: values.password };
     const res = await login(usefulValues);
     if (!res) {
       setTimeout(() => {
         setLoading(false);
+        formikAction.resetForm();
         return setfailed(`These credentiels don't match any account!`);
       }, 1000);
     } else {
       setAuth({ email: usefulValues.email, token: res });
+      formikAction.resetForm();
       next();
     }
   };

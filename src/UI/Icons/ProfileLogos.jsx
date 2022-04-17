@@ -27,21 +27,21 @@ export const SettingsLogo = () => {
       width='34'
       height='34'
       viewBox='0 0 34 34'
-      fill='none'
+      fill='white'
       xmlns='http://www.w3.org/2000/svg'
     >
       <Path
         d='M13.5714 1V5.57143L11.2857 6.71429L7.85714 3.28571L3.28571 7.85714L6.71429 11.2857L5.57143 13.5714H1V20.4286H5.57143L6.71429 22.7143L3.28571 26.1429L7.85714 30.7143L11.2857 27.2857L13.5714 28.4286V33H20.4286V28.4286L22.7143 27.2857L26.1429 30.7143L30.7143 26.1429L27.2857 22.7143L28.4286 20.4286H33V13.5714H28.4286L27.2857 11.2857L30.7143 7.85714L26.1429 3.28571L22.7143 6.71429L20.4286 5.57143V1H13.5714Z'
-        // stroke='#4DAAAA'
-        stroke='#FFFFFF'
+        stroke='#4DAAAA'
+        // stroke='#FFFFFF'
         strokeWidth={2}
         stroke-linecap='round'
         stroke-linejoin='round'
       />
       <Path
         d='M17.0001 21.5714C19.5249 21.5714 21.5716 19.5247 21.5716 17C21.5716 14.4753 19.5249 12.4286 17.0001 12.4286C14.4754 12.4286 12.4287 14.4753 12.4287 17C12.4287 19.5247 14.4754 21.5714 17.0001 21.5714Z'
-        // stroke='#4DAAAA'
-        stroke='#FFFFFF'
+        stroke='#4DAAAA'
+        // stroke='#FFFFFF'
         strokeWidth={2}
         stroke-linecap='round'
         stroke-linejoin='round'
@@ -199,18 +199,40 @@ export const Rectangle = props => {
 export const PenIcon = () => {
   return (
     <Svg
-      width='15'
-      height='15'
-      viewBox='0 0 20 20'
+      width='34'
+      height='34'
+      viewBox='0 0 34 34'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
     >
       <Path
-        d='M14.168 0.75458C15.1445 -0.221904 16.7305 -0.221904 17.707 0.75458L19.2461 2.29481C20.2227 3.27099 20.2227 4.85536 19.2461 5.83192L17.3555 7.72255L12.2774 2.6452L14.168 0.75458ZM16.4727 8.60536L7.36328 17.7108C6.95703 18.1171 6.45312 18.4179 5.90234 18.578L1.20194 19.9608C0.873038 20.0585 0.517178 19.9686 0.2746 19.6913C0.0320212 19.4843 -0.058682 19.1288 0.038115 18.7968L1.42069 14.0975C1.5832 13.5468 1.88124 13.0429 2.28788 12.6366L11.3945 3.5288L16.4727 8.60536Z'
-        fill='#4DAAAA'
+        fill-rule='evenodd'
+        clip-rule='evenodd'
+        d='M24.1111 1L33 9.88889L9.88889 33H1V24.1111L24.1111 1Z'
+        fill='white'
+        stroke='#4DAAAA'
+        strokeWidth='2'
+        stroke-linecap='round'
+        stroke-linejoin='round'
       />
     </Svg>
   );
 };
 
+export const EyeIcon = () => {
+  return (
+    <Svg
+      width='32'
+      height='18'
+      viewBox='0 0 32 18'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'
+    >
+      <Path
+        d='M32 9C27.6 3 21.8 0 16 0C10.2 0 4.4 3 0 9C8.8 21 23.2 21 32 9ZM10.8 4C10.3 4.9 10 5.9 10 7C10 10.3 12.7 13 16 13C19.3 13 22 10.3 22 7C22 5.9 21.7 4.9 21.2 4C23.7 5 26.1 6.7 28.2 9C24.7 12.9 20.5 15 16.1 15C11.7 15 7.4 12.9 3.9 9C5.9 6.7 8.3 5 10.8 4Z'
+        fill='#4DAAAA'
+      />
+    </Svg>
+  );
+};
 const styles = StyleSheet.create({});

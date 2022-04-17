@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import EditProfile from './ProfilePages/EditProfile';
 import CustomDrawer from '../UI/CustomDrawer';
 import AccountSettings from './ProfilePages/AccountSettings';
-import { ProfileLogo, SettingsLogo } from '../UI/Icons/ProfileLogos';
+import { PenIcon, ProfileLogo, SettingsLogo } from '../UI/Icons/ProfileLogos';
 import AuthContext from '../context/AuthProvider';
 import ProfilePreview from './ProfilePages/ProfilePreview';
 
@@ -30,9 +30,22 @@ const Profile = ({ navigation }) => {
       drawerContent={props => <CustomDrawer {...props} />}
     >
       <Drawer.Screen
-        name='Edit'
+        name='Preview'
         options={{
           drawerLabel: ProfileLogo,
+        }}
+      >
+        {props => (
+          <ProfilePreview
+            {...props}
+            goHome={() => navigation.replace('LoggedHome')}
+          />
+        )}
+      </Drawer.Screen>
+      <Drawer.Screen
+        name='Edit'
+        options={{
+          drawerLabel: PenIcon,
         }}
       >
         {props => (
@@ -44,18 +57,17 @@ const Profile = ({ navigation }) => {
       </Drawer.Screen>
       <Drawer.Screen
         name='Settings'
-        component={AccountSettings}
         options={{
           drawerLabel: SettingsLogo,
         }}
-      />
-      <Drawer.Screen
-        name='Preview'
-        component={ProfilePreview}
-        options={{
-          drawerLabel: SettingsLogo,
-        }}
-      />
+      >
+        {props => (
+          <AccountSettings
+            {...props}
+            goHome={() => navigation.replace('LoggedHome')}
+          />
+        )}
+      </Drawer.Screen>
     </Drawer.Navigator>
   );
 };

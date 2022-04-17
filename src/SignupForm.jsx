@@ -28,11 +28,14 @@ const validationSchema = Yup.object({
 const SignupForm = ({ next, loggedReplace }) => {
   const { auth, setAuth } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
+  const [failed, setfailed] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
   const submitHandler = async (values, formikActions) => {
     setLoading(true);
+    if (values.password.length() < 8)
+      return setfailed('Password must be at least 8 characters long');
     if (values.password !== values.passwordConfirm) return;
     const usefulValues = { email: values.email, password: values.password };
     const res = await signUp(usefulValues);
@@ -41,6 +44,7 @@ const SignupForm = ({ next, loggedReplace }) => {
       next();
     } else {
       setLoading(false);
+      setfailed(res || 'Something went wrong, please try again !');
       console.log('request timed out! sign up error !');
     }
   };
@@ -104,6 +108,9 @@ const SignupForm = ({ next, loggedReplace }) => {
               editable={!loading}
             />
             <Button title='Submit' onPress={handleSubmit} disabled={loading} />
+            {failed ? (
+              <Text style={styles.failed}>{failed.toString()}</Text>
+            ) : null}
             <Text
               style={{ textAlign: 'center', ...styles.help, marginTop: 10 }}
             >
@@ -133,5 +140,9 @@ const styles = StyleSheet.create({
   help: {
     fontSize: 15,
     color: '#A5A5A5',
+  },
+  error: {
+    fontSize: 15,
+    color: 'red',
   },
 });

@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { useContext } from 'react';
 import ProfilePage from './ProfilePage';
-import { PenIcon, Rectangle } from '../../UI/Icons/ProfileLogos';
+import { EyeIcon, PenIcon, Rectangle } from '../../UI/Icons/ProfileLogos';
 import onion from '../../../assets/onion.png';
 import ProgressBar from './../../UI/ProgressBar';
 import Button from './../../UI/Button';
 import AuthContext from '../../context/AuthProvider';
 
-const ProfilePreview = ({ navigation }) => {
+const ProfilePreview = ({ navigation, goHome }) => {
   const finishProfile = () => {
     navigation.navigate('Edit');
   };
@@ -16,7 +16,12 @@ const ProfilePreview = ({ navigation }) => {
   };
   const { auth } = useContext(AuthContext);
   return (
-    <ProfilePage backgroundColor='#4DAAAA' expand={expand} color='white'>
+    <ProfilePage
+      backgroundColor='#4DAAAA'
+      expand={expand}
+      color='white'
+      goHome={goHome}
+    >
       <View style={styles.iconContainer}>
         <Rectangle />
         <Image source={onion} style={styles.icon} />
