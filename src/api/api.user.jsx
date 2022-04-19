@@ -78,6 +78,7 @@ export const verifySignup = async data => {
 };
 export const loggedIn = async () => {
   const user = JSON.parse(await AsyncStorageLib.getItem('user'));
+  if (!user) return false;
   let authToken = user.token;
   if (authToken && authToken !== undefined) {
     return await axios
