@@ -16,7 +16,7 @@ const AccountAccess = ({ route, navigation }) => {
     navigation.setParams({ login: !route.params.login });
   };
   const goHome = email => {
-    navigation.navigate('Home');
+    navigation.navigate('LoggedHome');
   };
   const toForgotPassword = () => {
     navigation.navigate('ForgotPassword');

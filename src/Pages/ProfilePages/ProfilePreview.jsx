@@ -1,7 +1,14 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
-import React, { useContext } from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  Modal,
+} from 'react-native';
+import React, { useContext, useState } from 'react';
 import ProfilePage from './ProfilePage';
-import { EyeIcon, PenIcon, Rectangle } from '../../UI/Icons/ProfileLogos';
+import { PenIcon, Rectangle } from '../../UI/Icons/ProfileLogos';
 import onion from '../../../assets/onion.png';
 import ProgressBar from './../../UI/ProgressBar';
 import Button from './../../UI/Button';
@@ -15,6 +22,14 @@ const ProfilePreview = ({ navigation, goHome }) => {
     navigation.openDrawer();
   };
   const { auth } = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
+  let infoCount = 0;
+  if (auth.firstName) percentage++;
+  if (auth.LastName) infoCount++;
+  if (auth.phoneNumber) infoCount++;
+  if (auth.birthDate) infoCount++;
+  if (auth.address) infoCount++;
+  if (auth.email) infoCount++;
   return (
     <ProfilePage
       backgroundColor='#4DAAAA'
@@ -22,19 +37,48 @@ const ProfilePreview = ({ navigation, goHome }) => {
       color='white'
       goHome={goHome}
     >
-      <View style={styles.iconContainer}>
+      <Modal
+        animationType='fade'
+        transparent={true}
+        visible={showModal}
+        onRequestClose={() => {
+          setShowModal(!showModal);
+        }}
+      >
+        <View style={styles.modal}>
+          <View style={{ margin: 20 }}>
+            <Text>This is the choosing icon modal</Text>
+            <Button title='Close Modal' onPress={() => setShowModal(false)} />
+          </View>
+        </View>
+      </Modal>
+      <View>
         <Rectangle />
         <Image source={onion} style={styles.icon} />
-        <TouchableOpacity style={styles.change}>
+        <TouchableOpacity
+          style={styles.change}
+          onPress={() => setShowModal(true)}
+        >
           <PenIcon />
         </TouchableOpacity>
       </View>
       <Text style={styles.greeting}>Hi, {auth.email}</Text>
+      <View style={styles.infoContainer}>
+        <Text style={styles.info}>
+          Phone:{auth.phoneNumber ? auth.phoneNumber : '   -'}
+        </Text>
+        <Text style={styles.info}>
+          Address:{auth.address ? auth.address : '   -'}
+        </Text>
+        <Text style={styles.info}>
+          Birth Date:{auth.birthDate ? auth.birthDate : '   -'}
+        </Text>
+      </View>
       <View style={styles.bottom}>
         <View style={styles.content}>
           <Text style={styles.h1}>Profile Progress</Text>
           <Text style={styles.help}>You're almost there!</Text>
-          <ProgressBar />
+          <ProgressBar progress={(infoCount / 5) * 100} />
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <Button
               backgroundColor='#FFBCBC'
@@ -66,6 +110,7 @@ const styles = StyleSheet.create({
     right: 0,
     justifyContent: 'center',
     alignItems: 'center',
+    padding: 10,
   },
   greeting: {
     fontSize: 25,
@@ -105,5 +150,19 @@ const styles = StyleSheet.create({
     color: '#BCC5C5',
     fontWeight: 'bold',
     marginBottom: 10,
+  },
+  info: {
+    color: '#E5E5E5',
+    fontSize: 15,
+    marginVertical: 4,
+  },
+  infoContainer: {
+    marginVertical: 20,
+  },
+  modal: {
+    backgroundColor: 'white',
+    width: 300,
+    height: 300,
+    borderRadius: 20,
   },
 });

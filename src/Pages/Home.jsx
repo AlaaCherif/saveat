@@ -14,7 +14,6 @@ const Home = ({ navigation }) => {
   const goSignup = () => {
     navigation.navigate('Login1', { login: false });
   };
-  const [logged, setLogged] = useState();
 
   useEffect(() => {
     // console.log(auth.email);
@@ -26,11 +25,10 @@ const Home = ({ navigation }) => {
     //   setLogged(loggedInUser);
     //   navigation.replace('LoggedHome');
     // }
-  });
+  }, [auth]);
 
   return (
     <Page>
-      <Text>{logged}</Text>
       <View style={styles.container}>
         <Image source={image} style={{ width: 300, height: 300 }} />
         <Text style={styles.title}>Save it while saving on it</Text>
