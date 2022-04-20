@@ -142,6 +142,7 @@ const styles = StyleSheet.create({
   help: {
     fontSize: 15,
     color: '#A5A5A5',
+    marginTop: 5,
   },
   error: {
     fontSize: 15,

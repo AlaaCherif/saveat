@@ -37,7 +37,7 @@ const ChangeEmail = () => {
           return (
             <>
               <Input
-                placeholder='Old Email'
+                placeholder='New address'
                 value={email}
                 onChangeText={handleChange('email')}
                 error={touched.email && errors.email}
