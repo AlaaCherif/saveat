@@ -95,6 +95,7 @@ export const loggedIn = async () => {
         }
       })
       .catch(err => {
+        console.log(err);
         return false;
       });
   } else {
