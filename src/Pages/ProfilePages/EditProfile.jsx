@@ -1,15 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Input from '../../UI/Input';
 import DateInput from '../../UI/DateInput';
 import Button from './../../UI/Button';
 import ProfilePage from './ProfilePage';
+import AuthContext from '../../context/AuthProvider';
 
 const EditProfile = ({ navigation, goHome }) => {
+  const { auth } = useContext(AuthContext);
   const expand = () => {
     navigation.openDrawer();
   };
-  const [data, setData] = useState({ date: null });
+  const [data, setData] = useState(auth);
   const [date, setDate] = useState();
 
   const changeFN = name => {
@@ -34,11 +36,31 @@ const EditProfile = ({ navigation, goHome }) => {
   };
   return (
     <ProfilePage expand={expand} goHome={goHome} title='PROFILE'>
-      <Input label='First Name' onChangeText={changeFN} />
-      <Input label='Last Name' onChangeText={changeLN} />
-      <Input label='Phone Number' onChangeText={changePhone} />
+      <Input
+        label='First Name'
+        onChangeText={changeFN}
+        placeholder='Enter your first name'
+        value={data.firstName}
+      />
+      <Input
+        label='Last Name'
+        onChangeText={changeLN}
+        placeholder='Enter your last name'
+        value={data.lastName}
+      />
+      <Input
+        label='Phone Number'
+        onChangeText={changePhone}
+        placeholder='Enter your phone number'
+        value={data.phoneNumber}
+      />
       <DateInput date={date} setDate={setDate} />
-      <Input label='Address' onChangeText={changeAddress} />
+      <Input
+        label='Address'
+        onChangeText={changeAddress}
+        placeholder='Enter your address'
+        value={data.address}
+      />
       <Button backgroundColor='#FFBCBC' title='Save' />
     </ProfilePage>
   );

@@ -51,7 +51,7 @@ const ChangePassword = () => {
               <Input
                 label='Old Password'
                 error={touched.oldPass && errors.oldPass}
-                placeholder='********'
+                placeholder='Actual password'
                 value={oldPass}
                 onBlur={handleBlur('oldPass')}
                 onChangeText={handleChange('oldPass')}
@@ -62,7 +62,7 @@ const ChangePassword = () => {
               <Input
                 label='New Password'
                 error={touched.newPass && errors.newPass}
-                placeholder='********'
+                placeholder='New password'
                 value={newPass}
                 onBlur={handleBlur('newPass')}
                 onChangeText={handleChange('newPass')}
@@ -73,7 +73,7 @@ const ChangePassword = () => {
               <Input
                 label='Confirm'
                 error={touched.confirm && errors.confirm}
-                placeholder='********'
+                placeholder='Confirm password'
                 value={confirm}
                 onBlur={handleBlur('confirm')}
                 onChangeText={handleChange('confirm')}

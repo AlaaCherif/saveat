@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: '#F4F8F7',
     borderRadius: 5,
-    width: 220,
+    width: 230,
     height: 37,
     fontSize: 17,
     paddingHorizontal: 12,

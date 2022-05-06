@@ -27,7 +27,11 @@ const DateInput = ({ date, setDate }) => {
       <Text style={styles.label}>Birth Date</Text>
       <TouchableOpacity onPress={showDatepicker}>
         <View style={styles.input}>
-          <Text>{date ? date.toDateString() : ''}</Text>
+          {date ? (
+            <Text>{date.toDateString()}</Text>
+          ) : (
+            <Text style={styles.placeholder}>Enter your birthday</Text>
+          )}
         </View>
         <Calendar style={styles.calendar} />
       </TouchableOpacity>
@@ -56,7 +60,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     backgroundColor: '#F4F8F7',
     borderRadius: 5,
-    width: 220,
+    width: 230,
     height: 37,
     fontSize: 17,
     paddingHorizontal: 12,
@@ -74,5 +78,9 @@ const styles = StyleSheet.create({
     color: '#A5A5A5',
     fontWeight: 'bold',
     marginVertical: 8,
+  },
+  placeholder: {
+    fontSize: 17,
+    color: '#969a99',
   },
 });

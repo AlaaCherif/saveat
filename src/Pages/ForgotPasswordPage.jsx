@@ -95,10 +95,10 @@ export default ForgotPasswordPage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: '10%',
     alignItems: 'center',
     marginHorizontal: '10%',
-    paddingBottom: '20%',
   },
   titleContainer: {
     flexDirection: 'row',

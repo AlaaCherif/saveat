@@ -79,8 +79,8 @@ export const verifySignup = async data => {
 export const loggedIn = async () => {
   const user = JSON.parse(await AsyncStorageLib.getItem('user'));
   if (!user) return false;
-  let authToken = user.token;
-  if (authToken && authToken !== undefined) {
+  if (user.token && user.token !== undefined) {
+    let authToken = user.token;
     return await axios
       .get(`${api}/users/test`, {
         headers: {

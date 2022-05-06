@@ -4,9 +4,15 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import EditProfile from './ProfilePages/EditProfile';
 import CustomDrawer from '../UI/CustomDrawer';
 import AccountSettings from './ProfilePages/AccountSettings';
-import { PenIcon, ProfileLogo, SettingsLogo } from '../UI/Icons/ProfileLogos';
+import {
+  PenIcon,
+  PreferencesLogo,
+  ProfileLogo,
+  SettingsLogo,
+} from '../UI/Icons/ProfileLogos';
 import AuthContext from '../context/AuthProvider';
 import ProfilePreview from './ProfilePages/ProfilePreview';
+import Preferences from './ProfilePages/Preferences';
 
 const Drawer = createDrawerNavigator();
 
@@ -63,6 +69,19 @@ const Profile = ({ navigation }) => {
       >
         {props => (
           <AccountSettings
+            {...props}
+            goHome={() => navigation.replace('LoggedHome')}
+          />
+        )}
+      </Drawer.Screen>
+      <Drawer.Screen
+        name='Preferences'
+        options={{
+          drawerLabel: PreferencesLogo,
+        }}
+      >
+        {props => (
+          <Preferences
             {...props}
             goHome={() => navigation.replace('LoggedHome')}
           />
