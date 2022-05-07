@@ -34,18 +34,18 @@ const SignupForm = ({ next, loggedReplace }) => {
 
   const submitHandler = async (values, formikActions) => {
     setLoading(true);
-    if (values.password.length() < 8)
+    if (values.password.length < 8)
       return setfailed('Password must be at least 8 characters long');
     if (values.password !== values.passwordConfirm) return;
     const usefulValues = { email: values.email, password: values.password };
     const res = await signUp(usefulValues);
     if (res) {
-      setAuth({ email: usefulValues.email, token: res });
+      // setAuth({ email: usefulValues.email, token: res });
       next();
     } else {
       setLoading(false);
+      console.log(res);
       setfailed(res || 'Something went wrong, please try again !');
-      console.log('request timed out! sign up error !');
     }
   };
   const toggleShowPassword = () => {

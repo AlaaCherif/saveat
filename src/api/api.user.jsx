@@ -63,7 +63,7 @@ export const verifySignup = async data => {
           'user',
           JSON.stringify({
             token: res.data.token,
-            email: 'not implemented yet',
+            email: res.data.email,
           })
         );
         return 'true';
@@ -156,6 +156,35 @@ export const resetPassword = async (password, params) => {
       } else {
         return false;
         //invalid token or has expired
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      return false;
+    });
+};
+export const updateMe = async (data, token) => {
+  const user = await AsyncStorageLib.getItem('user');
+  let authToken = user.token;
+  const userInfo = {
+    firstName: data.firstName || user.firstName,
+    lastName: data.lastName || user.lastName,
+    phoneNumber: data.phoneNumber || user.phoneNumber,
+    address: data.address || user.address,
+    birthday: data.birthday || user.birthday,
+  };
+  console.log(data);
+  return await axios
+    .patch(`${api}/users/updateMe`, userInfo, {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .then(res => {
+      if (res.data.status === 'success') {
+        return true;
+      } else {
+        return false;
       }
     })
     .catch(err => {

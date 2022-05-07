@@ -5,6 +5,7 @@ import DateInput from '../../UI/DateInput';
 import Button from './../../UI/Button';
 import ProfilePage from './ProfilePage';
 import AuthContext from '../../context/AuthProvider';
+import { updateMe } from '../../api/api.user';
 
 const EditProfile = ({ navigation, goHome }) => {
   const { auth } = useContext(AuthContext);
@@ -34,6 +35,9 @@ const EditProfile = ({ navigation, goHome }) => {
       return { ...previousData, address: address };
     });
   };
+  const submitEdit = async () => {
+    await updateMe(data, auth.token);
+  };
   return (
     <ProfilePage expand={expand} goHome={goHome} title='PROFILE'>
       <Input
@@ -61,7 +65,7 @@ const EditProfile = ({ navigation, goHome }) => {
         placeholder='Enter your address'
         value={data.address}
       />
-      <Button backgroundColor='#FFBCBC' title='Save' />
+      <Button backgroundColor='#FFBCBC' title='Save' onPress={submitEdit} />
     </ProfilePage>
   );
 };

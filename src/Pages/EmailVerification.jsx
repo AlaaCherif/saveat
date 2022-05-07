@@ -19,6 +19,7 @@ const EmailVerification = ({ route, navigation }) => {
     setLoading(true);
     const res = await verifySignup({ code: code });
     if (res === 'true') {
+      setAuth({ email: usefulValues.email, token: res });
       next();
     } else {
       setLoading(false);
