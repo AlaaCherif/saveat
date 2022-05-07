@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Page from '../Page';
 import LoginLogo from '../UI/Icons/LoginLogo';
 import Progress from '../UI/Icons/Progress';
@@ -7,8 +7,10 @@ import Input from '../UI/Input';
 import Button from '../UI/Button';
 import { Timer } from '../logic/Timer';
 import { verifySignup } from '../api/api.user';
+import AuthContext from '../context/AuthProvider';
 
 const EmailVerification = ({ route, navigation }) => {
+  const { setInfo } = useContext(AuthContext);
   const [error, setError] = useState();
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ const EmailVerification = ({ route, navigation }) => {
     setLoading(true);
     const res = await verifySignup({ code: code });
     if (res === 'true') {
-      setAuth({ email: usefulValues.email, token: res });
+      setInfo({ ...res, email: route.params.email });
       next();
     } else {
       setLoading(false);

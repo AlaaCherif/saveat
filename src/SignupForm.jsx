@@ -41,7 +41,7 @@ const SignupForm = ({ next, loggedReplace }) => {
     const res = await signUp(usefulValues);
     if (res) {
       // setAuth({ email: usefulValues.email, token: res });
-      next();
+      next(usefulValues.email);
     } else {
       setLoading(false);
       console.log(res);

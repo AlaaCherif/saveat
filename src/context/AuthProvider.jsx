@@ -6,6 +6,17 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   // network ready
   const [auth, setAuth] = useState({});
+  const setInfo = data => {
+    console.log('setting data to state');
+    setAuth({
+      email: data.email,
+      token: data.token,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      phoneNumber: data.phoneNumber,
+      address: data.address,
+    });
+  };
   useEffect(async () => {
     const res = await loggedIn();
     if (res) {
@@ -17,9 +28,7 @@ export const AuthProvider = ({ children }) => {
         phoneNumber: res.phoneNumber,
         address: res.address,
       };
-      console.log('test is');
-      console.log(test);
-      setAuth(test);
+      setInfo(test);
     } else {
       await AsyncStorageLib.removeItem('user');
       setAuth({});
@@ -35,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   //   birthDate: ' 2001-02-13',
   // });
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, setAuth, setInfo }}>
       {children}
     </AuthContext.Provider>
   );

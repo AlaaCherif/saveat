@@ -27,7 +27,7 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm = ({ next, forgotPassword }) => {
-  const { setAuth, auth } = useContext(AuthContext);
+  const { setAuth, auth, setInfo } = useContext(AuthContext);
   const [showPassword, setshowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [failed, setfailed] = useState(false);
@@ -51,14 +51,7 @@ const LoginForm = ({ next, forgotPassword }) => {
         return setfailed(`These credentiels don't match any account!`);
       }, 1000);
     } else {
-      setAuth({
-        email: usefulValues.email,
-        token: res.token,
-        firstName: res.firstName,
-        lastName: res.lastName,
-        phoneNumber: res.phoneNumber,
-        address: res.address,
-      });
+      setInfo({ ...res, email: usefulValues.email });
       formikAction.resetForm();
       next();
     }

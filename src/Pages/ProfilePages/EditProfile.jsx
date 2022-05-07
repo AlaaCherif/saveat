@@ -36,6 +36,7 @@ const EditProfile = ({ navigation, goHome }) => {
     });
   };
   const submitEdit = async () => {
+    // console.log(await updateMe(data, auth.token));
     await updateMe(data, auth.token);
   };
   return (
@@ -56,7 +57,7 @@ const EditProfile = ({ navigation, goHome }) => {
         label='Phone Number'
         onChangeText={changePhone}
         placeholder='Enter your phone number'
-        value={data.phoneNumber.toString()}
+        value={data.phoneNumber && data.phoneNumber.toString()}
       />
       <DateInput date={date} setDate={setDate} />
       <Input

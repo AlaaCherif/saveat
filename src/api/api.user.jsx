@@ -68,7 +68,6 @@ export const verifySignup = async data => {
       },
     })
     .then(async res => {
-      console.log(res);
       if (res.data.status === 'success') {
         await AsyncStorageLib.setItem(
           'user',
@@ -189,7 +188,6 @@ export const updateMe = async (data, token) => {
     address: data.address || user.address,
     birthday: data.birthday || user.birthday,
   };
-  console.log(data);
   return await axios
     .patch(`${api}/users/updateMe`, userInfo, {
       headers: {
@@ -198,7 +196,7 @@ export const updateMe = async (data, token) => {
     })
     .then(res => {
       if (res.data.status === 'success') {
-        return true;
+        return res.data.data.updatedUser;
       } else {
         return false;
       }
