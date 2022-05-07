@@ -11,9 +11,20 @@ export const login = async data => {
         // await AsyncStorageLib.setItem('email', data.email);
         await AsyncStorageLib.setItem(
           'user',
-          JSON.stringify({ email: data.email, token: res.data.token })
+          JSON.stringify({
+            email: data.email,
+            token: res.data.token,
+            firstName: data.firstName,
+          })
         );
-        return res.data.token;
+        return {
+          token: res.data.token,
+          firstName: res.data.data.user.firstName,
+          lastName: res.data.data.user.lastName,
+          phoneNumber: res.data.data.user.phoneNumber,
+          address: res.data.data.user.address,
+          birthDate: res.data.data.user.birthDate,
+        };
       } else {
         console.log('api error during login');
       }
@@ -89,7 +100,14 @@ export const loggedIn = async () => {
       })
       .then(res => {
         if (res.data.status === 'success') {
-          return user;
+          return {
+            email: user.email,
+            token: user.token,
+            firstName: res.data.user.firstName,
+            lastName: res.data.user.lastName,
+            phoneNumber: res.data.user.phoneNumber,
+            address: res.data.user.address,
+          };
         } else {
           return false;
         }
@@ -103,16 +121,14 @@ export const loggedIn = async () => {
   }
 };
 
-export const logout = async () => {
-  const user = await AsyncStorageLib.getItem('user');
-  let authToken = user.token;
+export const logout = async token => {
   return await axios
     .post(
       `${api}/users/logout`,
       {},
       {
         headers: {
-          authorization: 'Bearer ' + authToken,
+          authorization: 'Bearer ' + token,
         },
       }
     )

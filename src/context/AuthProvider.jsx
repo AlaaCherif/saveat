@@ -9,7 +9,17 @@ export const AuthProvider = ({ children }) => {
   useEffect(async () => {
     const res = await loggedIn();
     if (res) {
-      setAuth({ email: res.email, token: res.token });
+      let test = {
+        email: res.email,
+        token: res.token,
+        firstName: res.firstName,
+        lastName: res.lastName,
+        phoneNumber: res.phoneNumber,
+        address: res.address,
+      };
+      console.log('test is');
+      console.log(test);
+      setAuth(test);
     } else {
       await AsyncStorageLib.removeItem('user');
       setAuth({});

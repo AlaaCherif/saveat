@@ -56,7 +56,7 @@ const EditProfile = ({ navigation, goHome }) => {
         label='Phone Number'
         onChangeText={changePhone}
         placeholder='Enter your phone number'
-        value={data.phoneNumber}
+        value={data.phoneNumber.toString()}
       />
       <DateInput date={date} setDate={setDate} />
       <Input
@@ -66,6 +66,13 @@ const EditProfile = ({ navigation, goHome }) => {
         value={data.address}
       />
       <Button backgroundColor='#FFBCBC' title='Save' onPress={submitEdit} />
+      <Button
+        backgroundColor='#FFBCBC'
+        title='auth'
+        onPress={() => {
+          console.log(auth);
+        }}
+      />
     </ProfilePage>
   );
 };

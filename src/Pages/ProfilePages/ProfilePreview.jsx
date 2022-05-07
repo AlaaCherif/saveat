@@ -24,7 +24,7 @@ const ProfilePreview = ({ navigation, goHome }) => {
   const { auth } = useContext(AuthContext);
   const [showModal, setShowModal] = useState(false);
   let infoCount = 0;
-  if (auth.firstName) percentage++;
+  if (auth.firstName) infoCount++;
   if (auth.LastName) infoCount++;
   if (auth.phoneNumber) infoCount++;
   if (auth.birthDate) infoCount++;
