@@ -44,7 +44,8 @@ export const signUp = async data => {
           'accessToken',
           res.data.accessToken
         );
-        return accessToken;
+
+        return res.data.accessToken;
       } else if (res.data.status === 'error') {
         return res.data.error;
       }
@@ -76,7 +77,9 @@ export const verifySignup = async data => {
             email: res.data.email,
           })
         );
-        return 'true';
+        console.log('this is from api');
+        console.log(res.data.newUser);
+        return { ...res.data.data.newUser, token: res.data.token };
       } else if (res.data.status === 'error') {
         return res.data.error;
       }

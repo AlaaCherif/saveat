@@ -38,15 +38,18 @@ const SignupForm = ({ next, loggedReplace }) => {
       return setfailed('Password must be at least 8 characters long');
     if (values.password !== values.passwordConfirm) return;
     const usefulValues = { email: values.email, password: values.password };
-    const res = await signUp(usefulValues);
-    if (res) {
-      // setAuth({ email: usefulValues.email, token: res });
-      next(usefulValues.email);
-    } else {
-      setLoading(false);
-      console.log(res);
-      setfailed(res || 'Something went wrong, please try again !');
-    }
+    await signUp(usefulValues).then(res => {
+      setTimeout(() => {
+        if (res) {
+          // setAuth({ email: usefulValues.email, token: res });
+          next(usefulValues.email);
+        } else {
+          setLoading(false);
+          console.log(res);
+          setfailed(res || 'Something went wrong, please try again !');
+        }
+      }, 1000);
+    });
   };
   const toggleShowPassword = () => {
     setShowPassword(prev => !prev);
