@@ -34,6 +34,23 @@ export const AuthProvider = ({ children }) => {
       setAuth({});
     }
   }, []);
+  const refresh = async () => {
+    const res = await loggedIn();
+    if (res) {
+      let test = {
+        email: res.email,
+        token: res.token,
+        firstName: res.firstName,
+        lastName: res.lastName,
+        phoneNumber: res.phoneNumber,
+        address: res.address,
+      };
+      setInfo(test);
+    } else {
+      await AsyncStorageLib.removeItem('user');
+      setAuth({});
+    }
+  };
 
   //local
   // const [auth, setAuth] = useState({
@@ -44,7 +61,7 @@ export const AuthProvider = ({ children }) => {
   //   birthDate: ' 2001-02-13',
   // });
   return (
-    <AuthContext.Provider value={{ auth, setAuth, setInfo }}>
+    <AuthContext.Provider value={{ auth, setAuth, setInfo, refresh }}>
       {children}
     </AuthContext.Provider>
   );

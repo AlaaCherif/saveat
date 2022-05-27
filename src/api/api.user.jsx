@@ -77,8 +77,6 @@ export const verifySignup = async data => {
             email: res.data.email,
           })
         );
-        console.log('this is from api');
-        console.log(res.data.newUser);
         return { ...res.data.data.newUser, token: res.data.token };
       } else if (res.data.status === 'error') {
         return res.data.error;

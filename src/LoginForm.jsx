@@ -48,7 +48,9 @@ const LoginForm = ({ next, forgotPassword }) => {
       setTimeout(() => {
         setLoading(false);
         formikAction.resetForm();
-        return setfailed(`These credentiels don't match any account!`);
+        return setfailed(
+          `Verify your email and password or Check internet connection`
+        );
       }, 1000);
     } else {
       setInfo({ ...res, email: usefulValues.email });
