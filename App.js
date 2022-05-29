@@ -39,11 +39,17 @@ const App = () => {
     toRender = (
       <NavigationContainer>
         <Stack.Navigator
+          initialRouteName='Slides'
           screenOptions={{
             headerTransparent: true,
             animation: 'fade_from_bottom',
           }}
         >
+          <Stack.Screen
+            name='Slides'
+            component={Slides}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen
             name='Home'
             component={Home}
@@ -83,11 +89,6 @@ const App = () => {
           <Stack.Screen
             name='Profile'
             component={Profile}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name='Slides'
-            component={Slides}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

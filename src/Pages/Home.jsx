@@ -43,14 +43,6 @@ const Home = ({ navigation }) => {
           color='black'
           onPress={goSignup}
         />
-        <Button
-          title='Sign up'
-          backgroundColor='white'
-          color='black'
-          onPress={() => {
-            navigation.navigate('Slides');
-          }}
-        />
       </View>
     </Page>
   );
