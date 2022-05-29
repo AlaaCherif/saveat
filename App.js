@@ -15,6 +15,7 @@ import ForgotPasswordPage from './src/Pages/ForgotPasswordPage';
 import Profile from './src/Pages/Profile';
 import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
+import Slides from './src/Pages/Slides';
 
 const App = () => {
   const [token, setToken] = useState();
@@ -46,7 +47,10 @@ const App = () => {
           <Stack.Screen
             name='Home'
             component={Home}
-            options={{ headerTitle: props => <Title {...props} /> }}
+            options={{
+              headerTitle: props => <Title {...props} />,
+              headerLeft: null,
+            }}
           />
           <Stack.Screen
             name='Login1'
@@ -79,6 +83,11 @@ const App = () => {
           <Stack.Screen
             name='Profile'
             component={Profile}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name='Slides'
+            component={Slides}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>

@@ -42,6 +42,7 @@ const ChangePassword = () => {
       setMessage({ text: 'An error occured !', type: 'Error' });
     }
     setLoading(false);
+    formikAction.resetForm();
     await refresh();
   };
   return (

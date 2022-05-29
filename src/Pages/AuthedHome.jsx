@@ -10,6 +10,7 @@ const AuthedHome = ({ navigation }) => {
   const handleLogout = async () => {
     await logout(auth.token).then(() => {
       setAuth({});
+      navigation.replace('Home');
     });
   };
   useEffect(async () => {
