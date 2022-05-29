@@ -13,6 +13,8 @@ import {
 import AuthContext from '../context/AuthProvider';
 import ProfilePreview from './ProfilePages/ProfilePreview';
 import Preferences from './ProfilePages/Preferences';
+import Cart from './ProfilePages/Cart';
+import { CartLogo } from './../UI/Icons/ProfileLogos';
 
 const Drawer = createDrawerNavigator();
 
@@ -85,6 +87,16 @@ const Profile = ({ navigation }) => {
             {...props}
             goHome={() => navigation.replace('LoggedHome')}
           />
+        )}
+      </Drawer.Screen>
+      <Drawer.Screen
+        name='Cart'
+        options={{
+          drawerLabel: CartLogo,
+        }}
+      >
+        {props => (
+          <Cart {...props} goHome={() => navigation.replace('LoggedHome')} />
         )}
       </Drawer.Screen>
     </Drawer.Navigator>

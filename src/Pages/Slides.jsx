@@ -6,7 +6,6 @@ import cuteBox from '../../assets/cuteBox.png';
 import money from '../../assets/money.png';
 import meal from '../../assets/meal.png';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { backgroundColor } from 'react-native/Libraries/Components/View/ReactNativeStyleAttributes';
 
 const Slides = ({ navigation }) => {
   const renderItem = ({ item }) => {
