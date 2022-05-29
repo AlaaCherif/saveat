@@ -207,3 +207,12 @@ export const updateMe = async (data, token) => {
       return false;
     });
 };
+export const updatePassword = async (data, token) => {
+  return await axios
+    .patch(`${api}/users/updatePassword`, data, {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .catch(err => console.log(err));
+};

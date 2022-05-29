@@ -8,8 +8,9 @@ import {
 } from 'react-native';
 import React, { useEffect, useRef } from 'react';
 import check from '../../assets/check.png';
+import close from '../../assets/close.png';
 
-const Message = ({ disappear }) => {
+const Message = ({ disappear, message, type }) => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const fadeIn = () => {
     Animated.timing(fadeAnim, {
@@ -39,11 +40,19 @@ const Message = ({ disappear }) => {
     >
       <TouchableWithoutFeedback onPress={fadeOut}>
         <View style={styles.container}>
-          <View style={styles.colored} />
-          <Image source={check} style={{ width: 35, height: 35 }} />
+          <View
+            style={{
+              ...styles.colored,
+              backgroundColor: type === 'Error' ? 'red' : '#50c766',
+            }}
+          />
+          <Image
+            source={type === 'Error' ? close : check}
+            style={{ width: 35, height: 35 }}
+          />
           <View style={{ marginLeft: 10 }}>
-            <Text>Success</Text>
-            <Text>Your information have been saved !</Text>
+            <Text>{type}</Text>
+            <Text>{message}</Text>
           </View>
         </View>
       </TouchableWithoutFeedback>

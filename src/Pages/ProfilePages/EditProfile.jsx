@@ -23,9 +23,12 @@ const EditProfile = ({ navigation, goHome }) => {
     setLoading(true);
     const result = await updateMe(data, auth.token);
     if (result) {
-      setMessage('Your information have been saved !');
+      setMessage({
+        text: 'Your information has been changed !',
+        type: 'Success',
+      });
     } else {
-      setMessage('Something went wrong');
+      setMessage({ text: 'Something went wrong !', type: 'Error' });
     }
     setLoading(false);
     await refresh();
@@ -91,6 +94,8 @@ const EditProfile = ({ navigation, goHome }) => {
       </ScrollView>
       {message && (
         <Message
+          type='Success'
+          message={message}
           disappear={() => {
             setMessage(false);
           }}
