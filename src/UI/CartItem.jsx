@@ -7,9 +7,10 @@ const CartItem = ({ addItem, item, deleteItem, removeItem }) => {
   return (
     <View>
       <View style={styles.itemContainer}>
-        <Image source={bagel} style={styles.image} />
+        {/* <Image source={bagel} style={styles.image} /> */}
         <Text style={styles.name}>{item.name}</Text>
 
+        <Text style={styles.quantity}>{item.quantity}</Text>
         <TouchableOpacity
           style={{ padding: 15, borderRadius: 50 }}
           onPress={() => {
@@ -18,7 +19,6 @@ const CartItem = ({ addItem, item, deleteItem, removeItem }) => {
         >
           <Icon name='trash-outline' size={24} color='#6CD6D6' />
         </TouchableOpacity>
-        <Text style={styles.quantity}>{item.quantity}</Text>
       </View>
       <View style={styles.adjustContainer}>
         <Text style={styles.price}>{item.price * item.quantity} DT</Text>

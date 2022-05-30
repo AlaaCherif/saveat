@@ -1,0 +1,113 @@
+[
+  {
+    "id": 1,
+    "category": "canned",
+    "subcategory": "regular",
+    "price": 25,
+    "stock": "true",
+
+    "items": [
+      {
+        "id": 1,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 2,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 3,
+        "name": "potato",
+        "category": "canned"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "category": "fresh",
+    "subcategory": "special",
+    "price": 15,
+    "stock": "true",
+    "items": [
+      {
+        "id": 1,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 2,
+        "name": "potato",
+        "category": "canned"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "category": "mixed",
+    "subcategory": "regular",
+    "price": 15,
+    "stock": "true",
+    "items": [
+      {
+        "id": 1,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 3,
+        "name": "potato",
+        "category": "canned"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "category": "canned",
+    "subcategory": "regular",
+    "price": 10,
+    "stock": "false",
+    "items": [
+      {
+        "id": 1,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 2,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 3,
+        "name": "potato",
+        "category": "canned"
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "category": "canned",
+    "subcategory": "regular",
+    "price": 5,
+    "stock": "false",
+    "items": [
+      {
+        "id": 1,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 2,
+        "name": "potato",
+        "category": "canned"
+      },
+      {
+        "id": 3,
+        "name": "potato",
+        "category": "canned"
+      }
+    ]
+  }
+]

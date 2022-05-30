@@ -13,7 +13,6 @@ import { AuthProvider } from './src/context/AuthProvider';
 import { StyleSheet } from 'react-native';
 import ForgotPasswordPage from './src/Pages/ForgotPasswordPage';
 import Profile from './src/Pages/Profile';
-import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
 import Slides from './src/Pages/Slides';
 
