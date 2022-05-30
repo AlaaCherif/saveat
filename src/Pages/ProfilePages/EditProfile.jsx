@@ -95,7 +95,7 @@ const EditProfile = ({ navigation, goHome }) => {
       {message && (
         <Message
           type='Success'
-          message={message}
+          message={message.text}
           disappear={() => {
             setMessage(false);
           }}

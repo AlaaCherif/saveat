@@ -3,21 +3,48 @@ import React from 'react';
 import bagel from '../../assets/bagel.png';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const CartItem = () => {
+const CartItem = ({ addItem, item, deleteItem, removeItem }) => {
   return (
     <View>
       <View style={styles.itemContainer}>
         <Image source={bagel} style={styles.image} />
-        <Text style={styles.name}>NAME</Text>
-        <View style={{ alignItems: 'center' }}>
-          <Text style={styles.price}>2.00 DT</Text>
-          <Text>-</Text>
-        </View>
-        <View style={{ alignItems: 'center' }}>
-          <TouchableOpacity style={{ padding: 15, borderRadius: 50 }}>
-            <Icon name='trash-outline' size={24} color='#6CD6D6' />
+        <Text style={styles.name}>{item.name}</Text>
+
+        <TouchableOpacity
+          style={{ padding: 15, borderRadius: 50 }}
+          onPress={() => {
+            deleteItem(item.id);
+          }}
+        >
+          <Icon name='trash-outline' size={24} color='#6CD6D6' />
+        </TouchableOpacity>
+        <Text style={styles.quantity}>{item.quantity}</Text>
+      </View>
+      <View style={styles.adjustContainer}>
+        <Text style={styles.price}>{item.price * item.quantity} DT</Text>
+        <View style={{ flexDirection: 'row' }}>
+          <TouchableOpacity
+            onPress={addItem.bind(null, item.id, item.name, item.price)}
+          >
+            <Icon
+              name='add'
+              size={20}
+              color='#6CD6D6'
+              style={{
+                padding: 5,
+              }}
+            />
           </TouchableOpacity>
-          <Text>+</Text>
+          <TouchableOpacity onPress={removeItem.bind(null, item.id)}>
+            <Icon
+              name='remove'
+              size={20}
+              color='#6CD6D6'
+              style={{
+                padding: 5,
+              }}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.seperator} />
@@ -32,6 +59,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    margin: 10,
   },
   seperator: {
     marginTop: 20,
@@ -41,12 +69,19 @@ const styles = StyleSheet.create({
   },
   name: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 25,
   },
   price: {
-    color: '#6CD6D6',
+    color: '#FFBCBC',
     fontWeight: 'bold',
-    fontSize: 15,
+    fontSize: 20,
   },
   image: {},
+  adjustContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  quantity: {
+    fontSize: 20,
+  },
 });

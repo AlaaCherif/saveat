@@ -6,6 +6,7 @@ const AuthContext = createContext({});
 export const AuthProvider = ({ children }) => {
   // network ready
   const [auth, setAuth] = useState({});
+  const [cart, setCart] = useState([]);
   const setInfo = data => {
     console.log('setting data to state');
     setAuth({
@@ -61,7 +62,9 @@ export const AuthProvider = ({ children }) => {
   //   birthDate: ' 2001-02-13',
   // });
   return (
-    <AuthContext.Provider value={{ auth, setAuth, setInfo, refresh }}>
+    <AuthContext.Provider
+      value={{ auth, setAuth, setInfo, refresh, cart, setCart }}
+    >
       {children}
     </AuthContext.Provider>
   );

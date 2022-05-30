@@ -6,10 +6,11 @@ import AuthContext from '../context/AuthProvider';
 import { logout } from '../api/api.user';
 
 const AuthedHome = ({ navigation }) => {
-  const { auth, setAuth } = useContext(AuthContext);
+  const { auth, setAuth, setCart } = useContext(AuthContext);
   const handleLogout = async () => {
     await logout(auth.token).then(() => {
       setAuth({});
+      setCart([]);
       navigation.replace('Home');
     });
   };
