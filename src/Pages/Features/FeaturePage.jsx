@@ -4,7 +4,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import AuthContext from '../../context/AuthProvider';
 import Page from '../../Page';
 
-const FeaturePage = ({ handleLogout, goProfile }) => {
+const FeaturePage = ({ handleLogout, goProfile, children }) => {
   return (
     <Page noAnimation={true}>
       <View
@@ -31,6 +31,7 @@ const FeaturePage = ({ handleLogout, goProfile }) => {
           />
         </TouchableOpacity>
       </View>
+      {children}
     </Page>
   );
 };
