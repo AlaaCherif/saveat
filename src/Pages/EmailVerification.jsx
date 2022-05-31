@@ -20,7 +20,6 @@ const EmailVerification = ({ route, navigation }) => {
   const verifyAccount = async () => {
     setLoading(true);
     const res = await verifySignup({ code: code });
-    console.log('this is from email verification');
     console.log(res);
     if (res.email) {
       setInfo({ email: res.email, token: res.token });

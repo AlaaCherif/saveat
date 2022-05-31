@@ -8,7 +8,6 @@ export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [cart, setCart] = useState([]);
   const setInfo = data => {
-    console.log('setting data to state');
     setAuth({
       email: data.email,
       token: data.token,
@@ -52,6 +51,46 @@ export const AuthProvider = ({ children }) => {
       setAuth({});
     }
   };
+  const addItem = (id, name, price) => {
+    if (cart.filter(item => item.id === id).length) {
+      const index = cart.findIndex(item => item.id === id);
+      setCart(previousCart => {
+        const newCart = [...previousCart];
+        newCart[index].quantity += 1;
+        return newCart;
+      });
+    } else {
+      setCart(previousState => {
+        const newState = [
+          ...previousState,
+          { id: id, name: name, price: price, quantity: 1 },
+        ];
+        return newState;
+      });
+    }
+  };
+  const removeItem = id => {
+    if (cart.filter(item => item.id === id).length) {
+      const index = cart.findIndex(item => item.id === id);
+      if (cart[index].quantity > 1) {
+        setCart(previousCart => {
+          const newCart = [...previousCart];
+          newCart[index].quantity -= 1;
+          return newCart;
+        });
+      } else {
+        deleteItem(id);
+      }
+    }
+  };
+  const deleteItem = id => {
+    setCart(previousCart => {
+      const newCart = [...previousCart];
+      const index = newCart.findIndex(item => item.id === id);
+      newCart.splice(index, 1);
+      return newCart;
+    });
+  };
 
   //local
   // const [auth, setAuth] = useState({
@@ -63,7 +102,7 @@ export const AuthProvider = ({ children }) => {
   // });
   return (
     <AuthContext.Provider
-      value={{ auth, setAuth, setInfo, refresh, cart, setCart }}
+      value={{ auth, setAuth, setInfo, refresh, cart, setCart, addItem }}
     >
       {children}
     </AuthContext.Provider>

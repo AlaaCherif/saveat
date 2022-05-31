@@ -19,7 +19,6 @@ const Cart = ({ navigation, goHome }) => {
         return newCart;
       });
     } else {
-      console.log('doesntexist');
       setCart(previousState => {
         const newState = [
           ...previousState,

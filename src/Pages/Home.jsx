@@ -16,7 +16,6 @@ const Home = ({ navigation }) => {
   };
 
   useEffect(() => {
-    // console.log(auth.email);
     if (auth.email) {
       navigation.replace('LoggedHome');
     }

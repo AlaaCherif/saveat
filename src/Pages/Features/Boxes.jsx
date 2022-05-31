@@ -1,9 +1,10 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, Image } from 'react-native';
 import React, { useEffect, useState, useContext } from 'react';
 import FeaturePage from './FeaturePage';
 import { getAllBoxes } from './../../api/api.box';
 import AuthContext from '../../context/AuthProvider';
 import Box from './Box';
+import cuteBox from '../../../assets/cuteBox.png';
 
 const Boxes = ({ handleLogout, goProfile }) => {
   const { auth } = useContext(AuthContext);
@@ -14,30 +15,54 @@ const Boxes = ({ handleLogout, goProfile }) => {
   const [boxes, setBoxes] = useState([]);
   useEffect(() => {
     getAll();
-    console.log(boxes);
   }, []);
 
   return (
     <FeaturePage handleLogout={handleLogout} goProfile={goProfile}>
-      <View style={styles.hero}>
-        <Text style={styles.title}>How it works?</Text>
-        <Text style={styles.description}>It works this way</Text>
-      </View>
       <ScrollView>
+        <View style={styles.hero}>
+          <Image
+            source={cuteBox}
+            w
+            style={{
+              position: 'absolute',
+              width: 100,
+              height: 100,
+              right: 20,
+              bottom: 40,
+            }}
+          />
+          <Text style={styles.title}>How it works?</Text>
+          <View style={{ maxWidth: 240 }}>
+            <Text style={styles.description}>
+              You just choose what do you want to get in your boxes and get it
+              delivered to your doorstep
+            </Text>
+          </View>
+        </View>
+        <Text
+          style={{
+            alignSelf: 'center',
+            fontSize: 30,
+            fontWeight: 'bold',
+            color: '#FFBCBC',
+          }}
+        >
+          Browse our boxes
+        </Text>
         <View style={{ alignItems: 'center' }}>
-          {boxes.map(
-            box => (
+          {boxes.map(box => (
+            <View key={box._id}>
               <Box
-                id={box.id}
+                id={box._id}
                 price={box.price}
                 category={box.category}
                 stock={box.stock}
                 items={box.items}
                 subCategory={box.subCategory}
               />
-            )
-            // <Box price={box.price} />;
-          )}
+            </View>
+          ))}
         </View>
       </ScrollView>
     </FeaturePage>
@@ -51,6 +76,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#4DAAAA',
     height: 200,
     borderRadius: 5,
+    marginVertical: 10,
   },
   title: {
     color: 'white',

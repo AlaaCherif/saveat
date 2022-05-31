@@ -6,6 +6,7 @@ import AuthContext from '../context/AuthProvider';
 import { logout } from '../api/api.user';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Boxes from './Features/Boxes';
+import Deals from './Features/Deals';
 
 const Tab = createBottomTabNavigator();
 
@@ -80,7 +81,7 @@ const AuthedHome = ({ navigation }) => {
         }}
       >
         {props => (
-          <Boxes {...props} handleLogout={handleLogout} goProfile={goProfile} />
+          <Deals {...props} handleLogout={handleLogout} goProfile={goProfile} />
         )}
       </Tab.Screen>
     </Tab.Navigator>

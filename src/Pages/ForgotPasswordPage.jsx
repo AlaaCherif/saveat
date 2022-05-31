@@ -25,7 +25,6 @@ const ForgotPasswordPage = ({ navigation }) => {
     setLoading(true);
     let data = { email: values.email };
     const res = await forgotPassword(data);
-    console.log(res);
     if (!res) {
       setLoading(false);
       setError('There is no account with this email address!');
