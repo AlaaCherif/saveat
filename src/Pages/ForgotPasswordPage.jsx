@@ -25,7 +25,6 @@ const ForgotPasswordPage = ({ navigation }) => {
     setLoading(true);
     let data = { email: values.email };
     const res = await forgotPassword(data);
-    console.log(res);
     if (!res) {
       setLoading(false);
       setError('There is no account with this email address!');
@@ -95,10 +94,10 @@ export default ForgotPasswordPage;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
+    paddingTop: '10%',
     alignItems: 'center',
     marginHorizontal: '10%',
-    paddingBottom: '20%',
   },
   titleContainer: {
     flexDirection: 'row',

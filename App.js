@@ -13,8 +13,8 @@ import { AuthProvider } from './src/context/AuthProvider';
 import { StyleSheet } from 'react-native';
 import ForgotPasswordPage from './src/Pages/ForgotPasswordPage';
 import Profile from './src/Pages/Profile';
-import { registerRootComponent } from 'expo';
 import { StatusBar } from 'expo-status-bar';
+import Slides from './src/Pages/Slides';
 
 const App = () => {
   const [token, setToken] = useState();
@@ -38,15 +38,24 @@ const App = () => {
     toRender = (
       <NavigationContainer>
         <Stack.Navigator
+          initialRouteName='Slides'
           screenOptions={{
             headerTransparent: true,
             animation: 'fade_from_bottom',
           }}
         >
           <Stack.Screen
+            name='Slides'
+            component={Slides}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
             name='Home'
             component={Home}
-            options={{ headerTitle: props => <Title {...props} /> }}
+            options={{
+              headerTitle: props => <Title {...props} />,
+              headerLeft: null,
+            }}
           />
           <Stack.Screen
             name='Login1'

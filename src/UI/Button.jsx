@@ -10,6 +10,7 @@ const Button = props => {
           backgroundColor: props.backgroundColor
             ? props.backgroundColor
             : '#4DAAAA',
+          width: props.width ? props.width : 220,
         }}
       >
         <Text

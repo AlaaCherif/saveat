@@ -8,7 +8,6 @@ import { Back } from './Icons/ProfileLogos';
 const CustomDrawer = props => {
   // useEffect(() => {
   //   // if (props.state.routes[0].name === 'Settings') {
-  //   //   console.log('fuck you ');
   //   // }
   //   // console.log(props.navigation.isFocused);
   // }, [props.state]);

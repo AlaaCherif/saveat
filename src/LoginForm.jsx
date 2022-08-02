@@ -27,7 +27,7 @@ const validationSchema = Yup.object({
 });
 
 const LoginForm = ({ next, forgotPassword }) => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth, auth, setInfo } = useContext(AuthContext);
   const [showPassword, setshowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [failed, setfailed] = useState(false);
@@ -48,10 +48,12 @@ const LoginForm = ({ next, forgotPassword }) => {
       setTimeout(() => {
         setLoading(false);
         formikAction.resetForm();
-        return setfailed(`These credentiels don't match any account!`);
+        return setfailed(
+          `Verify your email and password or Check internet connection`
+        );
       }, 1000);
     } else {
-      setAuth({ email: usefulValues.email, token: res });
+      setInfo({ ...res, email: usefulValues.email });
       formikAction.resetForm();
       next();
     }
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
   help: {
     fontSize: 15,
     color: '#A5A5A5',
+    marginTop: 5,
   },
   error: {
     fontSize: 15,

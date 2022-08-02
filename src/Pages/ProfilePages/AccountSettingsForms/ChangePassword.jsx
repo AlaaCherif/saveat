@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import { StyleSheet, View } from 'react-native';
+import React, { useState, useContext } from 'react';
 import { Formik } from 'formik';
 import Input from '../../../UI/Input';
 import Button from '../../../UI/Button';
 import * as Yup from 'yup';
+import { updatePassword } from '../../../api/api.user';
+import AuthContext from '../../../context/AuthProvider';
+import Message from '../../../UI/Message';
 
 const data = { oldPass: '', newPass: '', confirm: '' };
 const validationSchema = Yup.object({
@@ -15,20 +18,32 @@ const validationSchema = Yup.object({
 });
 
 const ChangePassword = () => {
+  const { refresh, auth } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [showOld, setShowOld] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+  const [message, setMessage] = useState(false);
   const toggleShow = setShow => {
     setShow(prev => !prev);
   };
-  const submitHandler = (values, formikAction) => {
+  const submitHandler = async (values, formikAction) => {
     setLoading(true);
-    console.log(values);
-    setTimeout(() => {
-      formikAction.resetForm();
-      setLoading(false);
-    }, 1000);
+    const result = await updatePassword(
+      {
+        password: values.oldPass,
+        newPassword: values.newPass,
+      },
+      auth.token
+    );
+    if (result) {
+      setMessage({ text: 'Your password has been changed !', type: 'Success' });
+    } else {
+      setMessage({ text: 'An error occured !', type: 'Error' });
+    }
+    setLoading(false);
+    formikAction.resetForm();
+    await refresh();
   };
   return (
     <View>
@@ -51,7 +66,7 @@ const ChangePassword = () => {
               <Input
                 label='Old Password'
                 error={touched.oldPass && errors.oldPass}
-                placeholder='********'
+                placeholder='Actual password'
                 value={oldPass}
                 onBlur={handleBlur('oldPass')}
                 onChangeText={handleChange('oldPass')}
@@ -62,7 +77,7 @@ const ChangePassword = () => {
               <Input
                 label='New Password'
                 error={touched.newPass && errors.newPass}
-                placeholder='********'
+                placeholder='New password'
                 value={newPass}
                 onBlur={handleBlur('newPass')}
                 onChangeText={handleChange('newPass')}
@@ -73,7 +88,7 @@ const ChangePassword = () => {
               <Input
                 label='Confirm'
                 error={touched.confirm && errors.confirm}
-                placeholder='********'
+                placeholder='Confirm password'
                 value={confirm}
                 onBlur={handleBlur('confirm')}
                 onChangeText={handleChange('confirm')}
@@ -91,6 +106,15 @@ const ChangePassword = () => {
           );
         }}
       </Formik>
+      {message && (
+        <Message
+          type={message.type}
+          message={message.text}
+          disappear={() => {
+            setMessage(false);
+          }}
+        />
+      )}
     </View>
   );
 };

@@ -11,9 +11,20 @@ export const login = async data => {
         // await AsyncStorageLib.setItem('email', data.email);
         await AsyncStorageLib.setItem(
           'user',
-          JSON.stringify({ email: data.email, token: res.data.token })
+          JSON.stringify({
+            email: data.email,
+            token: res.data.token,
+            firstName: data.firstName,
+          })
         );
-        return res.data.token;
+        return {
+          token: res.data.token,
+          firstName: res.data.data.user.firstName,
+          lastName: res.data.data.user.lastName,
+          phoneNumber: res.data.data.user.phoneNumber,
+          address: res.data.data.user.address,
+          birthDate: res.data.data.user.birthDate,
+        };
       } else {
         console.log('api error during login');
       }
@@ -33,7 +44,8 @@ export const signUp = async data => {
           'accessToken',
           res.data.accessToken
         );
-        return accessToken;
+
+        return res.data.accessToken;
       } else if (res.data.status === 'error') {
         return res.data.error;
       }
@@ -57,16 +69,15 @@ export const verifySignup = async data => {
       },
     })
     .then(async res => {
-      console.log(res);
       if (res.data.status === 'success') {
         await AsyncStorageLib.setItem(
           'user',
           JSON.stringify({
             token: res.data.token,
-            email: 'not implemented yet',
+            email: res.data.email,
           })
         );
-        return 'true';
+        return { ...res.data.data.newUser, token: res.data.token };
       } else if (res.data.status === 'error') {
         return res.data.error;
       }
@@ -79,8 +90,8 @@ export const verifySignup = async data => {
 export const loggedIn = async () => {
   const user = JSON.parse(await AsyncStorageLib.getItem('user'));
   if (!user) return false;
-  let authToken = user.token;
-  if (authToken && authToken !== undefined) {
+  if (user.token && user.token !== undefined) {
+    let authToken = user.token;
     return await axios
       .get(`${api}/users/test`, {
         headers: {
@@ -89,7 +100,14 @@ export const loggedIn = async () => {
       })
       .then(res => {
         if (res.data.status === 'success') {
-          return user;
+          return {
+            email: user.email,
+            token: user.token,
+            firstName: res.data.user.firstName,
+            lastName: res.data.user.lastName,
+            phoneNumber: res.data.user.phoneNumber,
+            address: res.data.user.address,
+          };
         } else {
           return false;
         }
@@ -103,16 +121,14 @@ export const loggedIn = async () => {
   }
 };
 
-export const logout = async () => {
-  const user = await AsyncStorageLib.getItem('user');
-  let authToken = user.token;
+export const logout = async token => {
   return await axios
     .post(
       `${api}/users/logout`,
       {},
       {
         headers: {
-          authorization: 'Bearer ' + authToken,
+          authorization: 'Bearer ' + token,
         },
       }
     )
@@ -162,4 +178,41 @@ export const resetPassword = async (password, params) => {
       console.log(err);
       return false;
     });
+};
+export const updateMe = async (data, token) => {
+  const user = await AsyncStorageLib.getItem('user');
+  let authToken = user.token;
+  const userInfo = {
+    firstName: data.firstName || user.firstName,
+    lastName: data.lastName || user.lastName,
+    phoneNumber: data.phoneNumber || user.phoneNumber,
+    address: data.address || user.address,
+    birthday: data.birthday || user.birthday,
+  };
+  return await axios
+    .patch(`${api}/users/updateMe`, userInfo, {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .then(res => {
+      if (res.data.status === 'success') {
+        return res.data.data.updatedUser;
+      } else {
+        return false;
+      }
+    })
+    .catch(err => {
+      console.log(err);
+      return false;
+    });
+};
+export const updatePassword = async (data, token) => {
+  return await axios
+    .patch(`${api}/users/updatePassword`, data, {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .catch(err => console.log(err));
 };
